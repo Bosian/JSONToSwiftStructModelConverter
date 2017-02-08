@@ -12,6 +12,10 @@ public protocol ArrayType
 {
     var arrayGenericType: Any { get }
     func getJsonSerializableArray() -> [JsonSerializeable]?
+    
+    func toJsonArray() -> Array<Any>
+    func toJsonData(_ options: JSONSerialization.WritingOptions) -> Data?
+    func toJsonString(_ options: JSONSerialization.WritingOptions) -> String
 }
 
 extension Array where Element: JsonDeserializeable
@@ -60,5 +64,37 @@ extension Array: ArrayType
         }
         
         return array
+    }
+
+    public func toJsonArray() -> Array<Any>
+    {
+        guard let array = self.getJsonSerializableArray() else
+        {
+            return self
+        }
+        
+        var jsonArray: Array<Any> = []
+        for jsonSerializeable in array {
+            jsonArray.append(jsonSerializeable.toDictionary())
+        }
+        
+        return jsonArray
+    }
+    
+    public func toJsonData(_ options: JSONSerialization.WritingOptions = JSONSerialization.WritingOptions()) -> Data?
+    {
+        let jsonArray = toJsonArray()
+        
+        let data = try? JSONSerialization.data(withJSONObject: jsonArray, options: options)
+        return data
+    }
+    
+    public func toJsonString(_ options: JSONSerialization.WritingOptions = JSONSerialization.WritingOptions()) -> String
+    {
+        guard let data = toJsonData(options) else {
+            return "{}"
+        }
+        
+        return String(data: data, encoding: String.Encoding.utf8) ?? "{}"
     }
 }

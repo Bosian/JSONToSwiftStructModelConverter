@@ -42,20 +42,7 @@ extension JsonSerializeable
                 dictionary[key] = value
                 
             case let array as ArrayType:
-                
-                if let array = array.getJsonSerializableArray()
-                {
-                    var jsonArray: Array<Any> = []
-                    for jsonSerializeable in array {
-                        jsonArray.append(jsonSerializeable.toDictionary())
-                    }
-                    
-                    dictionary[key] = jsonArray
-                }
-                else
-                {
-                    dictionary[key] = value
-                }
+                dictionary[key] = array.toJsonArray()
                 
             case let jsonSerializeable as JsonSerializeable:
                 dictionary[key] = jsonSerializeable.toDictionary()
