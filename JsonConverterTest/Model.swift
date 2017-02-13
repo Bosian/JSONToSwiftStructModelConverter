@@ -26,11 +26,31 @@ public struct Model: JsonSerializeable {
 
 extension Model {
     
-    public struct Skill: JsonSerializeable {
+    public struct Skill: JsonSerializeable, PropertyMapping, PropertyConverters {
         public let name: String
         
         public init(name: String) {
             self.name = name
+        }
+        
+        public func propertyMapping() -> [(String?, String?)] {
+            return [
+                ("name", "Name")
+            ]
+        }
+        
+        public func propertyConverters() -> [(String?, (Any?) -> (), () -> Any?)] {
+            return [
+                (
+                    "name",
+                    { (value) in
+                        
+                    },
+                    { () -> Any? in
+                        return "名稱" + self.name
+                    }
+                )
+            ]
         }
     }
     
