@@ -160,7 +160,7 @@ extension ViewController {
                 }
                 
                 pendingJsonDictionary.append((key, value))
-                pendingJsonMapping.append("self.\(key) = [\(typeName)](jsonArray: jsonDictionary[\"\(key)\"] as? JsonArray ?? JsonArray())")
+                pendingJsonMapping.append("self.\(key) = [\(typeName)](jsonArray: jsonDictionary[\"\(key)\"].jsonArrayOrDefault)")
                 
             default:
                 print("...無法剖析 key: \(key), value: \(value)")
