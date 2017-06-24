@@ -104,6 +104,7 @@ extension ViewController {
     private func convertToModel(for dictionary: JsonDictionary, withKey key: String)
     {
         var pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
+        var pendingInit: [(key: String, type: String)] = []
         var pendingJsonMapping: [String] = []
         
         // 輸出 struct 開頭
@@ -118,42 +119,64 @@ extension ViewController {
             case _ as String:
                 print("\(tabSapce)public var \(key): String = \"\"")
 
+                pendingInit.append((key: key, type: "String"))
+                
                 pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].stringOrDefault")
                 
             case _ as Int:
                 
                 let defaultValue = -1
                 print("\(tabSapce)public var \(key): Int = \(defaultValue)")
+                
+                pendingInit.append((key: key, type: "Int"))
+                
                 pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].intOrDefault")
                 
             case _ as Double:
                 print("\(tabSapce)public var \(key): Double = 0.0")
+                
+                pendingInit.append((key: key, type: "Double"))
+                
                 pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].doubleOrDefault")
                 
             case _ as [String]:
                 print("\(tabSapce)public var \(key): [String] = []")
+                
+                pendingInit.append((key: key, type: "[String]"))
+                
                 pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].stringArrayOrDefault")
                 
 //            case _ as [Int]:
 //                print("\(tabSapce)public var \(key): [Int] = []")
+//                
+//                pendingInit.append((key: key, type: "[Int]"))
+//                
 //                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].intArrayOrDefault")
 //                
 //            case _ as [Double]:
 //                print("\(tabSapce)public var \(key): [Double] = []")
+//                
+//                pendingInit.append((key: key, type: "[Double]"))
+//                
+//                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].doubleArrayOrDefault")
                 
             case let value as JsonDictionary:
                 
                 let typeName = uppercaseedFirstChar(for: key)
                 print("\(tabSapce)public var \(key): \(typeName) = \(typeName)()")
                 
+                pendingInit.append((key: key, type: "\(typeName)"))
+                
                 pendingJsonDictionary.append((key, value))
-                pendingJsonMapping.append("self.\(key) = \(typeName)(jsonDictionary: jsonDictionary[\"\(key)\"] as? JsonDictionary ?? JsonDictionary())")
+                pendingJsonMapping.append("self.\(key) = \(typeName)(jsonDictionary: jsonDictionary[\"\(key)\"].jsonDictionaryOrDefault)")
                 
                 
             case let value as JsonArray:
                 
                 let typeName = uppercaseedFirstChar(for: key)
                 print("\(tabSapce)public var \(key): [\(typeName)] = []")
+                
+                pendingInit.append((key: key, type: "[\(typeName)]"))
                 
                 guard let value = value.first else {
                     continue
@@ -163,7 +186,11 @@ extension ViewController {
                 pendingJsonMapping.append("self.\(key) = [\(typeName)](jsonArray: jsonDictionary[\"\(key)\"].jsonArrayOrDefault)")
                 
             default:
-                print("...無法剖析 key: \(key), value: \(value)")
+                print("...無法剖析 \(tabSapce)public var \(key): String = \"\"")
+                
+                pendingInit.append((key: key, type: "String ...無法剖析"))
+                
+                pendingJsonMapping.append("...無法剖析 self.\(key) = jsonDictionary[\"\(key)\"].stringOrDefault")
             }
         }
         
@@ -173,7 +200,19 @@ extension ViewController {
         print("\(tabSapce){")
         print("\(tabSapce)")
         print("\(tabSapce)}")
+        
         print("\(tabSapce)")
+        
+        print("\(tabSapce)public init(\(pendingInit.map { "\($0.key): \($0.type)" }.joined(separator: ", ")))")
+        print("\(tabSapce){")
+        
+        for item in pendingInit {
+            print("\(tabSapce)\(tabSapce)self.\(item.key) = \(item.key)")
+        }
+        print("\(tabSapce)}")
+        
+        print("\(tabSapce)")
+        
         print("\(tabSapce)public mutating func jsonMapping(_ jsonDictionary: JsonDictionary)")
         print("\(tabSapce){")
         

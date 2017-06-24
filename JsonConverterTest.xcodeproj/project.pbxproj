@@ -23,6 +23,7 @@
 		963CE10B1DCE685600DE1C31 /* JsonDeserializeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE1091DCE685600DE1C31 /* JsonDeserializeable.swift */; };
 		963CE10C1DCE685600DE1C31 /* JsonSerializeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE10A1DCE685600DE1C31 /* JsonSerializeable.swift */; };
 		963CE10E1DCE686400DE1C31 /* ArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE10D1DCE686400DE1C31 /* ArrayType.swift */; };
+		9651F7191EFEDA0300269ADE /* OptionalAnyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		963CE1091DCE685600DE1C31 /* JsonDeserializeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonDeserializeable.swift; sourceTree = "<group>"; };
 		963CE10A1DCE685600DE1C31 /* JsonSerializeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonSerializeable.swift; sourceTree = "<group>"; };
 		963CE10D1DCE686400DE1C31 /* ArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayType.swift; sourceTree = "<group>"; };
+		9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalAnyExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		96326DF91DC8684700C7D900 = {
 			isa = PBXGroup;
 			children = (
+				9651F71A1EFEDA0600269ADE /* Extension */,
 				963CE1081DCE683100DE1C31 /* Utilities */,
 				963CE0EA1DCE66A200DE1C31 /* JsonFramework */,
 				373D983C1E4AC089004EDB9B /* Models */,
@@ -191,6 +194,14 @@
 				963CE1041DCE682000DE1C31 /* Utilities.swift */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		9651F71A1EFEDA0600269ADE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */,
+			);
+			name = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,6 +349,7 @@
 				963CE10C1DCE685600DE1C31 /* JsonSerializeable.swift in Sources */,
 				963CE1071DCE682000DE1C31 /* Utilities.swift in Sources */,
 				963CE1051DCE682000DE1C31 /* PropertyConverters.swift in Sources */,
+				9651F7191EFEDA0300269ADE /* OptionalAnyExtension.swift in Sources */,
 				963CE0F31DCE673000DE1C31 /* JsonDictionary.swift in Sources */,
 				373D983E1E4AC09F004EDB9B /* Model.swift in Sources */,
 				963CE10E1DCE686400DE1C31 /* ArrayType.swift in Sources */,
@@ -497,7 +509,7 @@
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				INFOPLIST_FILE = JsonConverterTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = tw.sonet.JsonConverterTest;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.JsonConverterTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -510,7 +522,7 @@
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				INFOPLIST_FILE = JsonConverterTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = tw.sonet.JsonConverterTest;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.JsonConverterTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -524,7 +536,7 @@
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				INFOPLIST_FILE = JsonConverterTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = tw.sonet.JsonConverterTestTests;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.JsonConverterTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JsonConverterTest.app/JsonConverterTest";
@@ -539,7 +551,7 @@
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				INFOPLIST_FILE = JsonConverterTestTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = tw.sonet.JsonConverterTestTests;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.JsonConverterTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JsonConverterTest.app/JsonConverterTest";
@@ -553,7 +565,7 @@
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				INFOPLIST_FILE = JsonConverterTestUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = tw.sonet.JsonConverterTestUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.JsonConverterTestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = JsonConverterTest;
@@ -567,7 +579,7 @@
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				INFOPLIST_FILE = JsonConverterTestUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = tw.sonet.JsonConverterTestUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.JsonConverterTestUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = JsonConverterTest;
