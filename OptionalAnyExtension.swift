@@ -49,7 +49,7 @@ extension Optional where Wrapped == Any {
             return String(value)
             
         default:
-            return String(describing: value)
+            return ""
         }
     }
     
