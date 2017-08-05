@@ -55,12 +55,22 @@ extension Array: ArrayType
         var array: [JsonSerializeable] = []
         
         for item in self {
-            guard let item = item as? JsonSerializeable else {
+            
+            switch item {
+            case _ as String,
+                 _ as Bool,
+                 _ as Int,
+                 _ as Double,
+                 _ as CGFloat:
+                
+                return nil
+                
+            case let item as JsonSerializeable:
+                array.append(item)
+                
+            default:
                 return nil
             }
-            
-            array.append(item)
-            
         }
         
         return array
