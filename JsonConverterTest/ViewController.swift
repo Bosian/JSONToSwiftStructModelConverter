@@ -108,98 +108,99 @@ extension ViewController {
         var pendingJsonMapping: [String] = []
         
         // 輸出 struct 開頭
-        let typeName = uppercaseedFirstChar(for: key)
+        let typeName = pascalCase(for: key)
         print("public struct \(typeName): \(JsonDeserializeable.self) {\r\n")
         
         let tabSapce = "    "
         
         for (key, value) in dictionary {
 
-            let key = camelCase(for: key)
+            let swiftProperty = camelCase(for: key)
+            let jsonKey = key
             
             switch value {
             case _ as String:
-                print("\(tabSapce)public var \(key): String = \"\"")
+                print("\(tabSapce)public var \(swiftProperty): String = \"\"")
 
-                pendingInit.append((key: key, type: "String"))
+                pendingInit.append((key: swiftProperty, type: "String"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].stringOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
                 
             case _ as Int:
                 
                 let defaultValue = -1
-                print("\(tabSapce)public var \(key): Int = \(defaultValue)")
+                print("\(tabSapce)public var \(swiftProperty): Int = \(defaultValue)")
                 
-                pendingInit.append((key: key, type: "Int"))
+                pendingInit.append((key: swiftProperty, type: "Int"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].intOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
                 
             case _ as Bool:
-                print("\(tabSapce)public var \(key): Bool = false")
+                print("\(tabSapce)public var \(swiftProperty): Bool = false")
                 
-                pendingInit.append((key: key, type: "Bool"))
+                pendingInit.append((key: swiftProperty, type: "Bool"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].boolOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
                 
             case _ as Double:
-                print("\(tabSapce)public var \(key): Double = 0.0")
+                print("\(tabSapce)public var \(swiftProperty): Double = 0.0")
                 
-                pendingInit.append((key: key, type: "Double"))
+                pendingInit.append((key: swiftProperty, type: "Double"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].doubleOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleOrDefault")
                 
             case _ as [String]:
-                print("\(tabSapce)public var \(key): [String] = []")
+                print("\(tabSapce)public var \(swiftProperty): [String] = []")
                 
-                pendingInit.append((key: key, type: "[String]"))
+                pendingInit.append((key: swiftProperty, type: "[String]"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].stringArrayOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringArrayOrDefault")
                 
             case _ as [Int]:
-                print("\(tabSapce)public var \(key): [Int] = []")
+                print("\(tabSapce)public var \(swiftProperty): [Int] = []")
                 
-                pendingInit.append((key: key, type: "[Int]"))
+                pendingInit.append((key: swiftProperty, type: "[Int]"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].intArrayOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intArrayOrDefault")
                 
             case _ as [Double]:
-                print("\(tabSapce)public var \(key): [Double] = []")
+                print("\(tabSapce)public var \(swiftProperty): [Double] = []")
                 
-                pendingInit.append((key: key, type: "[Double]"))
+                pendingInit.append((key: swiftProperty, type: "[Double]"))
                 
-                pendingJsonMapping.append("self.\(key) = jsonDictionary[\"\(key)\"].doubleArrayOrDefault")
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleArrayOrDefault")
                 
             case let value as JsonDictionary:
                 
-                let typeName = uppercaseedFirstChar(for: key)
-                print("\(tabSapce)public var \(key): \(typeName) = \(typeName)()")
+                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                print("\(tabSapce)public var \(swiftProperty): \(typeName) = \(typeName)()")
                 
-                pendingInit.append((key: key, type: "\(typeName)"))
+                pendingInit.append((key: swiftProperty, type: "\(typeName)"))
                 
-                pendingJsonDictionary.append((key, value))
-                pendingJsonMapping.append("self.\(key) = \(typeName)(jsonDictionary: jsonDictionary[\"\(key)\"].jsonDictionaryOrDefault)")
+                pendingJsonDictionary.append((jsonKey, value))
+                pendingJsonMapping.append("self.\(swiftProperty) = \(typeName)(jsonDictionary: jsonDictionary[\"\(jsonKey)\"].jsonDictionaryOrDefault)")
                 
                 
             case let value as JsonArray:
                 
-                let typeName = uppercaseedFirstChar(for: key)
-                print("\(tabSapce)public var \(key): [\(typeName)] = []")
+                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                print("\(tabSapce)public var \(swiftProperty): [\(typeName)] = []")
                 
-                pendingInit.append((key: key, type: "[\(typeName)]"))
+                pendingInit.append((key: swiftProperty, type: "[\(typeName)]"))
                 
                 guard let value = value.first else {
                     continue
                 }
                 
-                pendingJsonDictionary.append((key, value))
-                pendingJsonMapping.append("self.\(key) = [\(typeName)](jsonArray: jsonDictionary[\"\(key)\"].jsonArrayOrDefault)")
+                pendingJsonDictionary.append((jsonKey, value))
+                pendingJsonMapping.append("self.\(swiftProperty) = [\(typeName)](jsonArray: jsonDictionary[\"\(jsonKey)\"].jsonArrayOrDefault)")
                 
             default:
-                print("...無法剖析 \(tabSapce)public var \(key): String = \"\"")
+                print("...無法剖析 \(tabSapce)public var \(swiftProperty): String = \"\"")
                 
-                pendingInit.append((key: key, type: "String ...無法剖析"))
+                pendingInit.append((key: typeName, type: "String ...無法剖析"))
                 
-                pendingJsonMapping.append("...無法剖析 self.\(key) = jsonDictionary[\"\(key)\"].stringOrDefault")
+                pendingJsonMapping.append("...無法剖析 self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
             }
         }
         
@@ -290,6 +291,23 @@ extension ViewController {
         
         // 首字轉小寫
         let firstWord = lowercaseedFirstChar(for: stringArray.first)
+        
+        // 單字小於3個字母則全轉大寫
+        var otherStringArray = stringArray.dropFirst().map { $0.characters.count > 3 ? uppercaseedFirstChar(for: $0) : $0.uppercased() }
+        otherStringArray.insert(firstWord, at: 0)
+        
+        return otherStringArray.joined()
+    }
+    
+    /// Pascal命名法（Pascal Case)
+    private func pascalCase(for str: String) -> String {
+        
+        let stringArray = str.replacingOccurrences(of: " ", with: "_")
+            .replacingOccurrences(of: "-", with: "_")
+            .components(separatedBy: "_")
+        
+        // 首字轉大寫
+        let firstWord = uppercaseedFirstChar(for: stringArray.first)
         
         // 單字小於3個字母則全轉大寫
         var otherStringArray = stringArray.dropFirst().map { $0.characters.count > 3 ? uppercaseedFirstChar(for: $0) : $0.uppercased() }
