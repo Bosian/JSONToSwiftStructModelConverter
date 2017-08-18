@@ -20,31 +20,49 @@ public protocol ArrayType
 
 extension Array where Element: JsonDeserializeable
 {
-    public init(jsonArray: JsonArray)
+    public init(jsonArray: JsonArray?)
     {
         self.init()
         
-        #if DEBUG
-            print("\r\n\r\nJson反序列化(jsonArray): \r\n\(jsonArray)\r\n")
-            
-            for (index, jsonDictionary) in jsonArray.enumerated()
-            {
-                print("\r\njsonArray index: \(index) 下方")
-                self.append(Element(jsonDictionary: jsonDictionary))
-            }
-            
-            print("\r\njsonArray end\r\n\r\n")
+        guard let jsonArray = jsonArray else {
+            return
+        }
         
-        #else
-            for jsonDictionary in jsonArray
-            {
-                self.append(Element(jsonDictionary: jsonDictionary))
+        deserialize(jsonArray: jsonArray)
+    }
+    
+    public init(jsonString: String?)
+    {
+        self.init()
+        
+        guard let data = jsonString?.data(using: .utf8) else {
+            return
+        }
+        
+        guard let jsonDictionary = try? JSONSerialization.jsonObject(with: data, options: []) else {
+            return
+        }
+        
+        guard let jsonArray = jsonDictionary as? JsonArray else {
+            return
+        }
+        
+        deserialize(jsonArray: jsonArray)
+    }
+    
+    private mutating func deserialize(jsonArray: JsonArray) {
+        for jsonDictionary in jsonArray
+        {
+            guard let jsonDictionary = Element(jsonDictionary: jsonDictionary) else {
+                continue
             }
-        #endif
+            
+            self.append(jsonDictionary)
+        }
     }
 }
 
-extension Array: ArrayType 
+extension Array: ArrayType
 {
     public var arrayGenericType: Any {
         return Element.self
@@ -75,7 +93,7 @@ extension Array: ArrayType
         
         return array
     }
-
+    
     public func toJsonArray() -> Array<Any>
     {
         guard let array = self.getJsonSerializableArray() else
