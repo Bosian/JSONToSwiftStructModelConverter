@@ -198,7 +198,7 @@ extension ViewController {
             default:
                 print("\(tabSapce)public var \(swiftProperty): Any? = nil")
                 
-                pendingInit.append((key: typeName, type: "Any?"))
+                pendingInit.append((key: swiftProperty, type: "Any?"))
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"]")
             }
