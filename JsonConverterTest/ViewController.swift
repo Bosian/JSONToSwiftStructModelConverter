@@ -293,7 +293,7 @@ extension ViewController {
         let firstWord = lowercaseedFirstChar(for: stringArray.first)
         
         // 單字小於3個字母則全轉大寫
-        var otherStringArray = stringArray.dropFirst().map { $0.characters.count > 3 ? uppercaseedFirstChar(for: $0) : $0.uppercased() }
+        var otherStringArray = stringArray.dropFirst().map { uppercaseedFirstChar(for: $0) }
         otherStringArray.insert(firstWord, at: 0)
         
         return otherStringArray.joined()
@@ -310,7 +310,7 @@ extension ViewController {
         let firstWord = uppercaseedFirstChar(for: stringArray.first)
         
         // 單字小於3個字母則全轉大寫
-        var otherStringArray = stringArray.dropFirst().map { $0.characters.count > 3 ? uppercaseedFirstChar(for: $0) : $0.uppercased() }
+        var otherStringArray = stringArray.dropFirst().map { uppercaseedFirstChar(for: $0)}
         otherStringArray.insert(firstWord, at: 0)
         
         return otherStringArray.joined()
