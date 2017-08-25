@@ -39,13 +39,10 @@ extension Model {
             ]
         }
         
-        public func propertyConverters() -> [(String?, (Any?) -> (), () -> Any?)] {
+        public func propertyConverters() -> [(String?, () -> Any?)] {
             return [
                 (
                     "name",
-                    { (value) in
-                        
-                    },
                     { () -> Any? in
                         return "名稱" + self.name
                     }
