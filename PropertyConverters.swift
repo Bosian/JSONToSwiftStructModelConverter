@@ -8,5 +8,5 @@
 
 public protocol PropertyConverters
 {
-    func propertyConverters() -> [(String?, (Any?) -> (), () -> Any?)]
+    func propertyConverters() -> [(String?, () -> Any?)]
 }

@@ -28,7 +28,19 @@ extension JsonSerializeable
         let propertyMapper = self as? PropertyMapping
         var propertyMappings = propertyMapper?.propertyMapping() ?? []
         
-        for (label, value) in mirror.children {
+        let mirrorChildren: AnyCollection<Mirror.Child>
+        
+        // Enum type
+        if mirror.children.isEmpty {
+            mirrorChildren = AnyCollection<Mirror.Child>([
+                (label: "\(self)", value: "\(self)")
+            ])
+//
+        } else {
+            mirrorChildren = mirror.children
+        }
+        
+        for (label, value) in mirrorChildren {
             
             guard let propertyName = label else {
                 continue
@@ -39,7 +51,10 @@ extension JsonSerializeable
             }
             
             // PropertyMapping, PropertyConverter
-            let outputKey = getOutputKey(propertyName, propertyMappings: &propertyMappings)
+            guard let outputKey = getOutputKey(propertyName, propertyMappings: &propertyMappings) else {
+                continue
+            }
+            
             guard let outputValue = getOutputValue(propertyName, value: value, converters: &propertyConverters) else {
                 continue
             }
@@ -93,9 +108,9 @@ extension JsonSerializeable
      
      - returns: 轉換後的Key
      */
-    private func getOutputKey(_ propertyName: String, propertyMappings: inout [(String?, String?)]) -> String
+    private func getOutputKey(_ propertyName: String, propertyMappings: inout [(String?, String?)]) -> String?
     {
-        var outputKey: String = propertyName
+        var outputKey: String? = propertyName
         
         // 尋找該屬性是否有使用 propertyMapping
         let propertyMappingIndexWrapped = propertyMappings.index(where: { (parameter: (String?, String?)) -> Bool in
@@ -107,7 +122,7 @@ extension JsonSerializeable
             return propertyName
         }
         
-        outputKey = propertyMappings[propertyMappingIndex].1 ?? propertyName
+        outputKey = propertyMappings[propertyMappingIndex].1
         propertyMappings.remove(at: propertyMappingIndex)
         
         return outputKey
@@ -122,10 +137,10 @@ extension JsonSerializeable
      
      - returns: 轉換後的Value
      */
-    private func getOutputValue(_ propertyName: String, value: Any, converters: inout [(String?, (Any?) -> (), () -> Any?)]) -> Any?
+    private func getOutputValue(_ propertyName: String, value: Any, converters: inout [(String?, () -> Any?)]) -> Any?
     {
         // 尋找該屬性是否有使用 propertyConverter
-        let indexWrapped = converters.index(where: { (parameter: (String?, (Any?) -> (), () -> Any?)) -> Bool in
+        let indexWrapped = converters.index(where: { (parameter: (String?, () -> Any?)) -> Bool in
             return propertyName == parameter.0
         })
         
@@ -141,6 +156,6 @@ extension JsonSerializeable
         converters.remove(at: index)
         
         // 回傳轉換後的Value
-        return converter.2()
+        return converter.1()
     }
 }
