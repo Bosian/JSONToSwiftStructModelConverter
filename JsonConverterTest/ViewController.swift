@@ -106,10 +106,11 @@ extension ViewController {
         var pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
         var pendingInit: [(key: String, type: String)] = []
         var pendingJsonMapping: [String] = []
+        var pendingPropertyMapping: [(swiftProperty: String, jsonKey: String)] = []
         
         // 輸出 struct 開頭
         let typeName = pascalCase(for: key)
-        print("public struct \(typeName): \(JsonDeserializeable.self) {\r\n")
+        print("public struct \(typeName): \(JsonDeserializeable.self), \(JsonSerializeable.self), \(PropertyMapping.self) {\r\n")
         
         let tabSapce = "    "
         
@@ -117,6 +118,8 @@ extension ViewController {
 
             let swiftProperty = camelCase(for: key)
             let jsonKey = key
+            
+            pendingPropertyMapping.append((swiftProperty: swiftProperty, jsonKey: jsonKey))
             
             switch value {
             case _ as String:
@@ -230,6 +233,18 @@ extension ViewController {
             print("\(tabSapce)\(tabSapce)\(item)")
         }
             
+        print("\(tabSapce)}")
+        
+        print()
+        
+        print("\(tabSapce)public func propertyMapping() -> [(String?, String?)] {")
+        print("\(tabSapce)\(tabSapce)return [")
+        
+        for item in pendingPropertyMapping {
+            print("\(tabSapce)\(tabSapce)\(tabSapce)(\"\(item.swiftProperty)\", \"\(item.jsonKey)\"),")
+        }
+        
+        print("\(tabSapce)\(tabSapce)]")
         print("\(tabSapce)}")
         
         // 輸出 struct 後大刮號
