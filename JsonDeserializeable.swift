@@ -9,6 +9,10 @@
 import UIKit
 
 public protocol JsonDeserializeable {
+    
+    init(jsonDictionary: JsonDictionary)
+    init(jsonString: String)
+    
     init?(jsonDictionary: JsonDictionary?)
     init?(jsonString: String?)
     
@@ -19,29 +23,33 @@ public protocol JsonDeserializeable {
 
 extension JsonDeserializeable
 {
+    public init(jsonDictionary: JsonDictionary) {
+        self.init()
+        
+        jsonMapping(jsonDictionary)
+    }
+    
     public init?(jsonDictionary: JsonDictionary?)
     {
         guard let jsonDictionary = jsonDictionary else {
             return nil
         }
-
-        self.init()
-    
-        jsonMapping(jsonDictionary)
+        
+        self.init(jsonDictionary: jsonDictionary)
     }
     
-    public init?(jsonString: String?)
-    {
-        guard let data = jsonString?.data(using: String.Encoding.utf8) else {
-            return nil
-        }
+    public init(jsonString: String) {
         
         self.init()
+        
+        guard let data = jsonString.data(using: String.Encoding.utf8) else {
+            return
+        }
         
         do
         {
             let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-
+            
             switch jsonObject {
             case let jsonDictionary as JsonDictionary:
                 jsonMapping(jsonDictionary)
@@ -57,8 +65,42 @@ extension JsonDeserializeable
             #if DEBUG
                 print("\r\nJson反序列化(catch error): \r\n\(error.localizedDescription)")
             #endif
+        }
+    }
+    
+    public init?(jsonString: String?)
+    {
+        guard let data = jsonString?.data(using: String.Encoding.utf8) else {
+            return nil
+        }
+        
+        do
+        {
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            
+            switch jsonObject {
+            case let jsonDictionary as JsonDictionary:
+                
+                self.init()
+                
+                jsonMapping(jsonDictionary)
+                
+            default:
+                #if DEBUG
+                    print("\r\nJson反序列化(未實作的Type): \r\n\(type(of: jsonObject))")
+                #endif
+                
+                return nil
+            }
+        }
+        catch let error
+        {
+            #if DEBUG
+                print("\r\nJson反序列化(catch error): \r\n\(error.localizedDescription)")
+            #endif
             
             return nil
         }
     }
 }
+

@@ -53,11 +53,7 @@ extension Array where Element: JsonDeserializeable
     private mutating func deserialize(jsonArray: JsonArray) {
         for jsonDictionary in jsonArray
         {
-            guard let jsonDictionary = Element(jsonDictionary: jsonDictionary) else {
-                continue
-            }
-            
-            self.append(jsonDictionary)
+            self.append(Element(jsonDictionary: jsonDictionary))
         }
     }
 }
