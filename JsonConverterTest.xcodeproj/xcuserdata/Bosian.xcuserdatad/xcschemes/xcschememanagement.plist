@@ -4,10 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>JsonConverterTest.xcscheme</key>
+		<key>JsonConvereterExtesnion.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>JsonConverterTest.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>macOSJsonConverter.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -23,6 +33,31 @@
 			<true/>
 		</dict>
 		<key>96326E201DC8684700C7D900</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96EFCC5C200B308D000FF553</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96EFCC6E200B30E0000FF553</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96EFCC7F200B30E0000FF553</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96EFCC8A200B30E0000FF553</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96EFCC9E200B30FF000FF553</key>
 		<dict>
 			<key>primary</key>
 			<true/>
