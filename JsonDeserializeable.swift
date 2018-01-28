@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Bobson. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public protocol JsonDeserializeable {
     

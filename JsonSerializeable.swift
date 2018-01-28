@@ -6,7 +6,8 @@
 //  Copyright © 2016年 Bobson. All rights reserved.
 //
 
-import UIKit
+import Foundation
+import CoreGraphics
 
 public protocol JsonSerializeable {
     
