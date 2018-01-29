@@ -52,7 +52,7 @@
 		96EFCCA0200B30FF000FF553 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96EFCC5F200B308E000FF553 /* Cocoa.framework */; };
 		96EFCCA3200B30FF000FF553 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFCCA2200B30FF000FF553 /* SourceEditorExtension.swift */; };
 		96EFCCA5200B30FF000FF553 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFCCA4200B30FF000FF553 /* SourceEditorCommand.swift */; };
-		96EFCCAA200B30FF000FF553 /* JsonConvereterExtesnion.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 96EFCC9F200B30FF000FF553 /* JsonConvereterExtesnion.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		96EFCCAA200B30FF000FF553 /* JsonConverterExtesnion.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 96EFCC9F200B30FF000FF553 /* JsonConverterExtesnion.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,7 +100,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				96EFCCAA200B30FF000FF553 /* JsonConvereterExtesnion.appex in Embed App Extensions */,
+				96EFCCAA200B30FF000FF553 /* JsonConverterExtesnion.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,11 +146,11 @@
 		96EFCC8B200B30E0000FF553 /* macOSJsonConverterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = macOSJsonConverterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EFCC8F200B30E0000FF553 /* macOSJsonConverterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = macOSJsonConverterUITests.swift; sourceTree = "<group>"; };
 		96EFCC91200B30E0000FF553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96EFCC9F200B30FF000FF553 /* JsonConvereterExtesnion.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JsonConvereterExtesnion.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		96EFCC9F200B30FF000FF553 /* JsonConverterExtesnion.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JsonConverterExtesnion.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EFCCA2200B30FF000FF553 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
 		96EFCCA4200B30FF000FF553 /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		96EFCCA6200B30FF000FF553 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96EFCCA7200B30FF000FF553 /* JsonConvereterExtesnion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JsonConvereterExtesnion.entitlements; sourceTree = "<group>"; };
+		96EFCCA7200B30FF000FF553 /* JsonConverterExtesnion.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JsonConverterExtesnion.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +229,7 @@
 				96EFCC70200B30E0000FF553 /* macOSJsonConverter */,
 				96EFCC83200B30E0000FF553 /* macOSJsonConverterTests */,
 				96EFCC8E200B30E0000FF553 /* macOSJsonConverterUITests */,
-				96EFCCA1200B30FF000FF553 /* JsonConvereterExtesnion */,
+				96EFCCA1200B30FF000FF553 /* JsonConverterExtesnion */,
 				96EFCC5E200B308E000FF553 /* Frameworks */,
 				96326E031DC8684700C7D900 /* Products */,
 			);
@@ -244,7 +244,7 @@
 				96EFCC6F200B30E0000FF553 /* macOSJsonConverter.app */,
 				96EFCC80200B30E0000FF553 /* macOSJsonConverterTests.xctest */,
 				96EFCC8B200B30E0000FF553 /* macOSJsonConverterUITests.xctest */,
-				96EFCC9F200B30FF000FF553 /* JsonConvereterExtesnion.appex */,
+				96EFCC9F200B30FF000FF553 /* JsonConverterExtesnion.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,15 +366,15 @@
 			path = macOSJsonConverterUITests;
 			sourceTree = "<group>";
 		};
-		96EFCCA1200B30FF000FF553 /* JsonConvereterExtesnion */ = {
+		96EFCCA1200B30FF000FF553 /* JsonConverterExtesnion */ = {
 			isa = PBXGroup;
 			children = (
 				96EFCCA2200B30FF000FF553 /* SourceEditorExtension.swift */,
 				96EFCCA4200B30FF000FF553 /* SourceEditorCommand.swift */,
 				96EFCCA6200B30FF000FF553 /* Info.plist */,
-				96EFCCA7200B30FF000FF553 /* JsonConvereterExtesnion.entitlements */,
+				96EFCCA7200B30FF000FF553 /* JsonConverterExtesnion.entitlements */,
 			);
-			path = JsonConvereterExtesnion;
+			path = JsonConverterExtesnion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -488,9 +488,9 @@
 			productReference = 96EFCC8B200B30E0000FF553 /* macOSJsonConverterUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		96EFCC9E200B30FF000FF553 /* JsonConvereterExtesnion */ = {
+		96EFCC9E200B30FF000FF553 /* JsonConverterExtesnion */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96EFCCAB200B30FF000FF553 /* Build configuration list for PBXNativeTarget "JsonConvereterExtesnion" */;
+			buildConfigurationList = 96EFCCAB200B30FF000FF553 /* Build configuration list for PBXNativeTarget "JsonConverterExtesnion" */;
 			buildPhases = (
 				96EFCC9B200B30FF000FF553 /* Sources */,
 				96EFCC9C200B30FF000FF553 /* Frameworks */,
@@ -500,9 +500,9 @@
 			);
 			dependencies = (
 			);
-			name = JsonConvereterExtesnion;
+			name = JsonConverterExtesnion;
 			productName = JsonConvereterExtesnion;
-			productReference = 96EFCC9F200B30FF000FF553 /* JsonConvereterExtesnion.appex */;
+			productReference = 96EFCC9F200B30FF000FF553 /* JsonConverterExtesnion.appex */;
 			productType = "com.apple.product-type.xcode-extension";
 		};
 /* End PBXNativeTarget section */
@@ -578,7 +578,7 @@
 				96EFCC6E200B30E0000FF553 /* macOSJsonConverter */,
 				96EFCC7F200B30E0000FF553 /* macOSJsonConverterTests */,
 				96EFCC8A200B30E0000FF553 /* macOSJsonConverterUITests */,
-				96EFCC9E200B30FF000FF553 /* JsonConvereterExtesnion */,
+				96EFCC9E200B30FF000FF553 /* JsonConverterExtesnion */,
 			);
 		};
 /* End PBXProject section */
@@ -754,7 +754,7 @@
 		};
 		96EFCCA9200B30FF000FF553 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96EFCC9E200B30FF000FF553 /* JsonConvereterExtesnion */;
+			target = 96EFCC9E200B30FF000FF553 /* JsonConverterExtesnion */;
 			targetProxy = 96EFCCA8200B30FF000FF553 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1126,16 +1126,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = JsonConvereterExtesnion/JsonConvereterExtesnion.entitlements;
+				CODE_SIGN_ENTITLEMENTS = JsonConverterExtesnion/JsonConverterExtesnion.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = JsonConvereterExtesnion/Info.plist;
+				INFOPLIST_FILE = JsonConverterExtesnion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.macOSJsonConverter.JsonConvereterExtesnion;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.macOSJsonConverter.JsonConverterExtesnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -1150,16 +1150,16 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CODE_SIGN_ENTITLEMENTS = JsonConvereterExtesnion/JsonConvereterExtesnion.entitlements;
+				CODE_SIGN_ENTITLEMENTS = JsonConverterExtesnion/JsonConverterExtesnion.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 8W6454B7RN;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = JsonConvereterExtesnion/Info.plist;
+				INFOPLIST_FILE = JsonConverterExtesnion/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.macOSJsonConverter.JsonConvereterExtesnion;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.bosian.macOSJsonConverter.JsonConverterExtesnion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -1234,7 +1234,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		96EFCCAB200B30FF000FF553 /* Build configuration list for PBXNativeTarget "JsonConvereterExtesnion" */ = {
+		96EFCCAB200B30FF000FF553 /* Build configuration list for PBXNativeTarget "JsonConverterExtesnion" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96EFCCAC200B30FF000FF553 /* Debug */,

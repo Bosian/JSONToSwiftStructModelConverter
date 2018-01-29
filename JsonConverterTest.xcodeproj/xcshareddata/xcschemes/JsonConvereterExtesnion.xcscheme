@@ -16,8 +16,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96EFCC9E200B30FF000FF553"
-               BuildableName = "JsonConvereterExtesnion.appex"
-               BlueprintName = "JsonConvereterExtesnion"
+               BuildableName = "JsonConverterExtesnion.appex"
+               BlueprintName = "JsonConverterExtesnion"
                ReferencedContainer = "container:JsonConverterTest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,8 +49,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EFCC9E200B30FF000FF553"
-            BuildableName = "JsonConvereterExtesnion.appex"
-            BlueprintName = "JsonConvereterExtesnion"
+            BuildableName = "JsonConverterExtesnion.appex"
+            BlueprintName = "JsonConverterExtesnion"
             ReferencedContainer = "container:JsonConverterTest.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
