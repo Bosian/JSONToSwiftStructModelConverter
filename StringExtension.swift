@@ -74,6 +74,13 @@ extension String {
                 pendingInit.append((key: swiftProperty, type: "String"))
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
+
+            case _ as Bool:
+                result += "\(tabSapce)public var \(swiftProperty): Bool = false"
+                
+                pendingInit.append((key: swiftProperty, type: "Bool"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
                 
             case _ as Int:
                 
@@ -83,13 +90,6 @@ extension String {
                 pendingInit.append((key: swiftProperty, type: "Int"))
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
-                
-            case _ as Bool:
-                result += "\(tabSapce)public var \(swiftProperty): Bool = false"
-                
-                pendingInit.append((key: swiftProperty, type: "Bool"))
-                
-                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
                 
             case _ as Double:
                 result += "\(tabSapce)public var \(swiftProperty): Double = 0.0"
