@@ -114,7 +114,7 @@ extension JsonSerializeable
         var outputKey: String? = propertyName
         
         // 尋找該屬性是否有使用 propertyMapping
-        let propertyMappingIndexWrapped = propertyMappings.index(where: { (parameter: (String?, String?)) -> Bool in
+        let propertyMappingIndexWrapped = propertyMappings.firstIndex(where: { (parameter: (String?, String?)) -> Bool in
             return parameter.0 == propertyName
         })
         
@@ -141,7 +141,7 @@ extension JsonSerializeable
     private func getOutputValue(_ propertyName: String, value: Any, converters: inout [(String?, () -> Any?)]) -> Any?
     {
         // 尋找該屬性是否有使用 propertyConverter
-        let indexWrapped = converters.index(where: { (parameter: (String?, () -> Any?)) -> Bool in
+        let indexWrapped = converters.firstIndex(where: { (parameter: (String?, () -> Any?)) -> Bool in
             return propertyName == parameter.0
         })
         
