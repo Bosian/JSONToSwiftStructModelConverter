@@ -43,6 +43,8 @@
 		9692517C201DC23F000173AE /* PropertyConverters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE1021DCE682000DE1C31 /* PropertyConverters.swift */; };
 		9692517D201DC246000173AE /* PropertyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE1031DCE682000DE1C31 /* PropertyMapping.swift */; };
 		9692517E201DC257000173AE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE1041DCE682000DE1C31 /* Utilities.swift */; };
+		96E7FB6325F5CC9C005B79CD /* XcodeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96E7FB6225F5CC9C005B79CD /* XcodeKit.framework */; };
+		96E7FB6425F5CC9C005B79CD /* XcodeKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96E7FB6225F5CC9C005B79CD /* XcodeKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		96EFCC72200B30E0000FF553 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFCC71200B30E0000FF553 /* AppDelegate.swift */; };
 		96EFCC74200B30E0000FF553 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EFCC73200B30E0000FF553 /* ViewController.swift */; };
 		96EFCC76200B30E0000FF553 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96EFCC75200B30E0000FF553 /* Assets.xcassets */; };
@@ -94,6 +96,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		96E7FB6525F5CC9C005B79CD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				96E7FB6425F5CC9C005B79CD /* XcodeKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		96EFCCAE200B30FF000FF553 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +145,7 @@
 		963CE10D1DCE686400DE1C31 /* ArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayType.swift; sourceTree = "<group>"; };
 		9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalAnyExtension.swift; sourceTree = "<group>"; };
 		9692516B201DB6F9000173AE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		96E7FB6225F5CC9C005B79CD /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
 		96EFCC5F200B308E000FF553 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		96EFCC6F200B30E0000FF553 /* macOSJsonConverter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macOSJsonConverter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EFCC71200B30E0000FF553 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -201,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96EFCCA0200B30FF000FF553 /* Cocoa.framework in Frameworks */,
+				96E7FB6325F5CC9C005B79CD /* XcodeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +345,7 @@
 		96EFCC5E200B308E000FF553 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				96E7FB6225F5CC9C005B79CD /* XcodeKit.framework */,
 				96EFCC5F200B308E000FF553 /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -495,6 +511,7 @@
 				96EFCC9B200B30FF000FF553 /* Sources */,
 				96EFCC9C200B30FF000FF553 /* Frameworks */,
 				96EFCC9D200B30FF000FF553 /* Resources */,
+				96E7FB6525F5CC9C005B79CD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
