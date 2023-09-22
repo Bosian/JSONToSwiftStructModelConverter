@@ -44,6 +44,14 @@
                     <key>XCSourceEditorCommandName</key>
                     <string>Paste Swift decodable model</string>
                 </dict>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).postmanParameter</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>Paste from postman params</string>
+                </dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>

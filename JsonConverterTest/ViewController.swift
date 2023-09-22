@@ -15,6 +15,15 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func printJsonFromPostmanParams(_ sender: Any) {
+        let json: String = #"""
+        [{"key":"count","value":"50","equals":true,"description":null,"enabled":true},{"key":"page","value":"1","equals":true,"description":null,"enabled":true},{"key":"main_category_en","value":"nutrition","equals":true,"description":null,"enabled":true}]
+        """#
+        let jsonModel: String = json.jsonFromPostmanParams
+        
+        print(jsonModel)
+    }
+    
     @IBAction func printJsonDecodableModel(_ sender: Any) {
         let jsonString: String = "{\"metadata\":{\"status\":\"0000\",\"desc\":\"\"},\"data\":{\"uncommented_orders\":[{\"id\":\"17KK111111\",\"prod_name\":\"product name\",\"img_url\":\"https://img.sit.kkday.com/image/get/w_600%2Cc_fit/s1.kkday.com/product_2173/20150528034717_QInp9/jpg\",\"lst_dt_go\":\"2017-11-11 (Taipei)\"}]}}"
         let jsonModel: String = jsonString.jsonDecodableModel

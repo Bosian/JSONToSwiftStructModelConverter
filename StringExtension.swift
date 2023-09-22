@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// MARK: - Swift JsonDeserialziation
 extension String {
     public var jsonModel: String
     {
@@ -425,6 +426,156 @@ extension String {
                 
                 pendingJsonDictionary.append((jsonKey, value))
                 pendingJsonMapping.append("self.\(swiftProperty) = [\(typeName)](jsonArray: jsonDictionary[\"\(jsonKey)\"].jsonArrayOrDefault)")
+                
+            default:
+                result += "\(tabSapce)let \(swiftProperty): Any?"
+                
+                pendingInit.append((key: swiftProperty, type: "Any?"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"]")
+            }
+        }
+        
+        // 輸出 struct 後大刮號
+        result += "}\r\n"
+        
+        for (key, dictionary) in pendingJsonDictionary {
+            result += convertToDecodable(for: dictionary, withKey: key)
+        }
+        
+        return result
+    }
+}
+
+/// Mark: - From postman params
+extension String {
+    
+    var jsonFromPostmanParams: String {
+        let jsonString = self
+        guard let data = jsonString.data(using: .utf8) else {
+            return ""
+        }
+        
+        var array: JsonArray?
+        
+        do {
+            array = try JSONSerialization.jsonObject(with: data, options: []) as? JsonArray
+        }
+        catch let error
+        {
+            print(error.localizedDescription)
+            return ""
+        }
+        
+        guard let arrayUnwrapped = array else {
+            return ""
+        }
+        
+        let key = "Root"
+        let result = convertToEncodableFromPostman(for: arrayUnwrapped, withKey: key)
+        return result
+    }
+    
+    /// 將 Postman Dictionary 輸出成 Json String
+    ///
+    /// - Parameters:
+    ///   - dictionary: Json Dictionary
+    ///   - key: Root struct Name
+    private func convertToEncodableFromPostman(for array: JsonArray, withKey key: String) -> String
+    {
+        let postmanTuples: [(key: String, value: String, description: String, enabled: Bool)] = array.map { dictionary in
+
+            var key: String = ""
+            var value: String = ""
+            var description: String = ""
+            var enabled: Bool = false
+            
+            for (postmanKey, postmanValue) in dictionary {
+                
+                let postmanValue: Any? = postmanValue
+                switch postmanKey {
+                    case "key":
+                        key = postmanValue.stringOrDefault
+                        
+                    case "value":
+                        value = postmanValue.stringOrDefault
+                        
+                    case "description":
+                        description = postmanValue.stringOrDefault
+                        
+                    case "enabled":
+                        enabled = postmanValue.boolOrDefault
+                        
+                    default:
+                        break
+                }
+            }
+            
+            return (key, value, description, enabled)
+        }
+        
+        var pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
+        var pendingInit: [(key: String, type: String)] = []
+        var pendingJsonMapping: [String] = []
+        var pendingPropertyMapping: [(swiftProperty: String, jsonKey: String)] = []
+        
+        // 輸出 struct 開頭
+        let typeName = pascalCase(for: key)
+
+        var result = "struct \(typeName): \(Encodable.self) {\r\n" {
+            didSet {
+                result += "\r\n"
+            }
+        }
+        
+        let tabSapce = "    "
+        
+        for (key, value, description, enabled) in postmanTuples {
+            
+            let swiftProperty = camelCase(for: key)
+            let jsonKey = key
+            
+            pendingPropertyMapping.append((swiftProperty: swiftProperty, jsonKey: jsonKey))
+            
+            result += {
+                var comment: String = "\r\n\(tabSapce)/// "
+                if !description.isEmpty {
+                    comment += "\(description), "
+                }
+                comment += "e.g. \(value)"
+                return comment
+            }()
+
+            switch value {
+            case _ as String:
+                result += "\(tabSapce)let \(swiftProperty): String"
+                
+                pendingInit.append((key: swiftProperty, type: "String"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
+
+            case _ as Bool:
+                result += "\(tabSapce)let \(swiftProperty): Bool"
+                
+                pendingInit.append((key: swiftProperty, type: "Bool"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
+                
+            case _ as Int:
+                
+                let defaultValue = -1
+                result += "\(tabSapce)let \(swiftProperty): Int"
+                
+                pendingInit.append((key: swiftProperty, type: "Int"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
+                
+            case _ as Double:
+                result += "\(tabSapce)let \(swiftProperty): Double"
+                
+                pendingInit.append((key: swiftProperty, type: "Double"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleOrDefault")
                 
             default:
                 result += "\(tabSapce)let \(swiftProperty): Any?"

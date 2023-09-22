@@ -24,6 +24,8 @@
 		963CE10C1DCE685600DE1C31 /* JsonSerializeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE10A1DCE685600DE1C31 /* JsonSerializeable.swift */; };
 		963CE10E1DCE686400DE1C31 /* ArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE10D1DCE686400DE1C31 /* ArrayType.swift */; };
 		964B9C5E2ABD57870007125C /* SourceCommandEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964B9C5D2ABD57870007125C /* SourceCommandEnum.swift */; };
+		964EE1D02ABD673D00CB7357 /* OptionalAnyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */; };
+		964EE1D22ABD674B00CB7357 /* OptionalAnyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */; };
 		9651F7191EFEDA0300269ADE /* OptionalAnyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */; };
 		9692516C201DB6F9000173AE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692516B201DB6F9000173AE /* StringExtension.swift */; };
 		9692516D201DB6F9000173AE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692516B201DB6F9000173AE /* StringExtension.swift */; };
@@ -718,6 +720,7 @@
 				96925170201DB781000173AE /* JsonSerializeable.swift in Sources */,
 				96EFCC72200B30E0000FF553 /* AppDelegate.swift in Sources */,
 				9692516D201DB6F9000173AE /* StringExtension.swift in Sources */,
+				964EE1D22ABD674B00CB7357 /* OptionalAnyExtension.swift in Sources */,
 				96925171201DB78F000173AE /* PropertyConverters.swift in Sources */,
 				9692516E201DB742000173AE /* JsonDictionary.swift in Sources */,
 				96925174201DB7B3000173AE /* JsonArray.swift in Sources */,
@@ -755,6 +758,7 @@
 				96925176201DC1EF000173AE /* StringExtension.swift in Sources */,
 				9692517D201DC246000173AE /* PropertyMapping.swift in Sources */,
 				9692517A201DC229000173AE /* JsonArray.swift in Sources */,
+				964EE1D02ABD673D00CB7357 /* OptionalAnyExtension.swift in Sources */,
 				96925177201DC1FD000173AE /* JsonDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

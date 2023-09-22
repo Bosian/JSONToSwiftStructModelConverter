@@ -20,41 +20,48 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dx0-5R-mFC">
-                                <rect key="frame" x="16" y="36" width="343" height="210"/>
+                                <rect key="frame" x="16" y="36" width="343" height="255"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="WaP-J4-HIg">
-                                        <rect key="frame" x="101" y="0.0" width="141" height="210"/>
+                                        <rect key="frame" x="62.5" y="0.0" width="218" height="255"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPl-Dp-d9m">
-                                                <rect key="frame" x="0.0" y="0.0" width="141" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="218" height="30"/>
+                                                <state key="normal" title="輸出Json from postman params"/>
+                                                <connections>
+                                                    <action selector="printJsonFromPostmanParams:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cTq-i7-SMj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xs-MU-gxY">
+                                                <rect key="frame" x="0.0" y="45" width="141" height="30"/>
                                                 <state key="normal" title="輸出Json Decodable"/>
                                                 <connections>
-                                                    <action selector="printJsonDecodableModel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f4j-gb-ryL"/>
+                                                    <action selector="printJsonDecodableModel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yv0-3Z-o1K"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-kC-bB0">
-                                                <rect key="frame" x="0.0" y="45" width="110" height="30"/>
+                                                <rect key="frame" x="0.0" y="90" width="110" height="30"/>
                                                 <state key="normal" title="輸出Json Model"/>
                                                 <connections>
                                                     <action selector="printJsonModel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eV2-EM-u0n"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbD-bt-uhI">
-                                                <rect key="frame" x="0.0" y="90" width="109" height="30"/>
+                                                <rect key="frame" x="0.0" y="135" width="109" height="30"/>
                                                 <state key="normal" title="輸出Json String"/>
                                                 <connections>
                                                     <action selector="printJsonString:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nU2-Y2-Z1M"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlV-PU-xNH">
-                                                <rect key="frame" x="0.0" y="135" width="104" height="30"/>
+                                                <rect key="frame" x="0.0" y="180" width="104" height="30"/>
                                                 <state key="normal" title="輸出Json Array"/>
                                                 <connections>
                                                     <action selector="printJsonArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cd8-Ch-rRR"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59X-mT-cVk">
-                                                <rect key="frame" x="0.0" y="180" width="139" height="30"/>
+                                                <rect key="frame" x="0.0" y="225" width="139" height="30"/>
                                                 <state key="normal" title="輸出Json 原生 Array"/>
                                                 <connections>
                                                     <action selector="printNativeJsonArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="87P-3a-bOc"/>
