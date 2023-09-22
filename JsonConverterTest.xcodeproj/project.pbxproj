@@ -23,6 +23,7 @@
 		963CE10B1DCE685600DE1C31 /* JsonDeserializeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE1091DCE685600DE1C31 /* JsonDeserializeable.swift */; };
 		963CE10C1DCE685600DE1C31 /* JsonSerializeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE10A1DCE685600DE1C31 /* JsonSerializeable.swift */; };
 		963CE10E1DCE686400DE1C31 /* ArrayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963CE10D1DCE686400DE1C31 /* ArrayType.swift */; };
+		964B9C5E2ABD57870007125C /* SourceCommandEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964B9C5D2ABD57870007125C /* SourceCommandEnum.swift */; };
 		9651F7191EFEDA0300269ADE /* OptionalAnyExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */; };
 		9692516C201DB6F9000173AE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692516B201DB6F9000173AE /* StringExtension.swift */; };
 		9692516D201DB6F9000173AE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9692516B201DB6F9000173AE /* StringExtension.swift */; };
@@ -143,6 +144,7 @@
 		963CE1091DCE685600DE1C31 /* JsonDeserializeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonDeserializeable.swift; sourceTree = "<group>"; };
 		963CE10A1DCE685600DE1C31 /* JsonSerializeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonSerializeable.swift; sourceTree = "<group>"; };
 		963CE10D1DCE686400DE1C31 /* ArrayType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayType.swift; sourceTree = "<group>"; };
+		964B9C5D2ABD57870007125C /* SourceCommandEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCommandEnum.swift; sourceTree = "<group>"; };
 		9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalAnyExtension.swift; sourceTree = "<group>"; };
 		9692516B201DB6F9000173AE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		96E7FB6225F5CC9C005B79CD /* XcodeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XcodeKit.framework; path = Library/Frameworks/XcodeKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -333,6 +335,14 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		964B9C5C2ABD577B0007125C /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				964B9C5D2ABD57870007125C /* SourceCommandEnum.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		9651F71A1EFEDA0600269ADE /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +395,7 @@
 		96EFCCA1200B30FF000FF553 /* JsonConverterExtesnion */ = {
 			isa = PBXGroup;
 			children = (
+				964B9C5C2ABD577B0007125C /* Enum */,
 				96EFCCA2200B30FF000FF553 /* SourceEditorExtension.swift */,
 				96EFCCA4200B30FF000FF553 /* SourceEditorCommand.swift */,
 				96EFCCA6200B30FF000FF553 /* Info.plist */,
@@ -740,6 +751,7 @@
 				96925179201DC223000173AE /* JsonSerializeable.swift in Sources */,
 				9692517B201DC22D000173AE /* ArrayType.swift in Sources */,
 				96EFCCA5200B30FF000FF553 /* SourceEditorCommand.swift in Sources */,
+				964B9C5E2ABD57870007125C /* SourceCommandEnum.swift in Sources */,
 				96925176201DC1EF000173AE /* StringExtension.swift in Sources */,
 				9692517D201DC246000173AE /* PropertyMapping.swift in Sources */,
 				9692517A201DC229000173AE /* JsonArray.swift in Sources */,

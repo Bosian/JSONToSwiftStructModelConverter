@@ -26,8 +26,21 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         }
         
         print(json)
+
+        guard let type = SourceCommandType(invocation: invocation) else {
+            return
+        }
         
-        let jsonModel: String = json.jsonModel
+        let jsonModel: String = {
+            switch type {
+                case .jsonDeserialization:
+                    return json.jsonModel
+                    
+                case .decodable:
+                    return json.jsonDecodableModel
+            }
+        }()
+
         print(jsonModel)
         
         guard !jsonModel.isEmpty else {
