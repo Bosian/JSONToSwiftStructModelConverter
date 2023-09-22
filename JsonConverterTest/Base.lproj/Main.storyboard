@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,45 +19,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="WaP-J4-HIg">
-                                <rect key="frame" x="16" y="36" width="343" height="165"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dx0-5R-mFC">
+                                <rect key="frame" x="16" y="36" width="343" height="210"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPl-Dp-d9m">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
-                                        <state key="normal" title="輸出Json Model"/>
-                                        <connections>
-                                            <action selector="printJsonModel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mvq-Wf-9LY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbD-bt-uhI">
-                                        <rect key="frame" x="0.0" y="45" width="343" height="30"/>
-                                        <state key="normal" title="輸出Json String"/>
-                                        <connections>
-                                            <action selector="printJsonString:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nU2-Y2-Z1M"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlV-PU-xNH">
-                                        <rect key="frame" x="0.0" y="90" width="343" height="30"/>
-                                        <state key="normal" title="輸出Json Array"/>
-                                        <connections>
-                                            <action selector="printJsonArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cd8-Ch-rRR"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59X-mT-cVk">
-                                        <rect key="frame" x="0.0" y="135" width="343" height="30"/>
-                                        <state key="normal" title="輸出Json 原生 Array"/>
-                                        <connections>
-                                            <action selector="printNativeJsonArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="87P-3a-bOc"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="WaP-J4-HIg">
+                                        <rect key="frame" x="101" y="0.0" width="141" height="210"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPl-Dp-d9m">
+                                                <rect key="frame" x="0.0" y="0.0" width="141" height="30"/>
+                                                <state key="normal" title="輸出Json Decodable"/>
+                                                <connections>
+                                                    <action selector="printJsonDecodableModel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f4j-gb-ryL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qhh-kC-bB0">
+                                                <rect key="frame" x="0.0" y="45" width="110" height="30"/>
+                                                <state key="normal" title="輸出Json Model"/>
+                                                <connections>
+                                                    <action selector="printJsonModel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eV2-EM-u0n"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbD-bt-uhI">
+                                                <rect key="frame" x="0.0" y="90" width="109" height="30"/>
+                                                <state key="normal" title="輸出Json String"/>
+                                                <connections>
+                                                    <action selector="printJsonString:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nU2-Y2-Z1M"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlV-PU-xNH">
+                                                <rect key="frame" x="0.0" y="135" width="104" height="30"/>
+                                                <state key="normal" title="輸出Json Array"/>
+                                                <connections>
+                                                    <action selector="printJsonArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cd8-Ch-rRR"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="59X-mT-cVk">
+                                                <rect key="frame" x="0.0" y="180" width="139" height="30"/>
+                                                <state key="normal" title="輸出Json 原生 Array"/>
+                                                <connections>
+                                                    <action selector="printNativeJsonArray:" destination="BYZ-38-t0r" eventType="touchUpInside" id="87P-3a-bOc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="WaP-J4-HIg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="EiR-b6-W8w"/>
-                            <constraint firstAttribute="trailing" secondItem="WaP-J4-HIg" secondAttribute="trailing" constant="16" id="kpq-kE-ddo"/>
-                            <constraint firstItem="WaP-J4-HIg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="rXn-Ob-i4B"/>
+                            <constraint firstItem="Dx0-5R-mFC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="0jQ-PM-edn"/>
+                            <constraint firstItem="Dx0-5R-mFC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="E9v-UG-7DG"/>
+                            <constraint firstAttribute="trailing" secondItem="Dx0-5R-mFC" secondAttribute="trailing" constant="16" id="OYB-MK-M23"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Dx0-5R-mFC" secondAttribute="bottom" id="b3Q-tc-gmZ"/>
                         </constraints>
                     </view>
                 </viewController>

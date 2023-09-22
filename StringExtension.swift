@@ -287,3 +287,161 @@ extension String {
         return otherStringArray.joined()
     }
 }
+
+/// MARK: - Swift 4 Decodable
+extension String {
+
+    public var jsonDecodableModel: String
+    {
+        let jsonString = self
+        guard let data = jsonString.data(using: .utf8) else {
+            return ""
+        }
+        
+        var dictionary: JsonDictionary?
+        
+        do {
+            dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? JsonDictionary
+        }
+        catch let error
+        {
+            print(error.localizedDescription)
+            return ""
+        }
+        
+        guard let dictionaryUnwrapped = dictionary else {
+            return ""
+        }
+        
+        let key = "Root"
+        let result = convertToDecodable(for: dictionaryUnwrapped, withKey: key)
+        return result
+    }
+    
+    /// 將 Dictionary 輸出成 Json String
+    ///
+    /// - Parameters:
+    ///   - dictionary: Json Dictionary
+    ///   - key: Root struct Name
+    private func convertToDecodable(for dictionary: JsonDictionary, withKey key: String) -> String
+    {
+        
+        var pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
+        var pendingInit: [(key: String, type: String)] = []
+        var pendingJsonMapping: [String] = []
+        var pendingPropertyMapping: [(swiftProperty: String, jsonKey: String)] = []
+        
+        // 輸出 struct 開頭
+        let typeName = pascalCase(for: key)
+
+        var result = "struct \(typeName): \(Decodable.self) {\r\n" {
+            didSet {
+                result += "\r\n"
+            }
+        }
+        
+        let tabSapce = "    "
+        
+        for (key, value) in dictionary {
+            
+            let swiftProperty = camelCase(for: key)
+            let jsonKey = key
+            
+            pendingPropertyMapping.append((swiftProperty: swiftProperty, jsonKey: jsonKey))
+            
+            switch value {
+            case _ as String:
+                result += "\(tabSapce)let \(swiftProperty): String"
+                
+                pendingInit.append((key: swiftProperty, type: "String"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
+
+            case _ as Bool:
+                result += "\(tabSapce)let \(swiftProperty): Bool"
+                
+                pendingInit.append((key: swiftProperty, type: "Bool"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
+                
+            case _ as Int:
+                
+                let defaultValue = -1
+                result += "\(tabSapce)let \(swiftProperty): Int"
+                
+                pendingInit.append((key: swiftProperty, type: "Int"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
+                
+            case _ as Double:
+                result += "\(tabSapce)let \(swiftProperty): Double"
+                
+                pendingInit.append((key: swiftProperty, type: "Double"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleOrDefault")
+                
+            case _ as [String]:
+                result += "\(tabSapce)let \(swiftProperty): [String]"
+                
+                pendingInit.append((key: swiftProperty, type: "[String]"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringArrayOrDefault")
+                
+            case _ as [Int]:
+                result += "\(tabSapce)let \(swiftProperty): [Int]"
+                
+                pendingInit.append((key: swiftProperty, type: "[Int]"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intArrayOrDefault")
+                
+            case _ as [Double]:
+                result += "\(tabSapce)let \(swiftProperty): [Double]"
+                
+                pendingInit.append((key: swiftProperty, type: "[Double]"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleArrayOrDefault")
+                
+            case let value as JsonDictionary:
+                
+                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                result += "\(tabSapce)let \(swiftProperty): \(typeName)"
+                
+                pendingInit.append((key: swiftProperty, type: "\(typeName)"))
+                
+                pendingJsonDictionary.append((jsonKey, value))
+                pendingJsonMapping.append("self.\(swiftProperty) = \(typeName)(jsonDictionary: jsonDictionary[\"\(jsonKey)\"].jsonDictionaryOrDefault)")
+                
+                
+            case let value as JsonArray:
+                
+                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                result += "\(tabSapce)let \(swiftProperty): [\(typeName)]"
+                
+                pendingInit.append((key: swiftProperty, type: "[\(typeName)]"))
+                
+                guard let value = value.first else {
+                    continue
+                }
+                
+                pendingJsonDictionary.append((jsonKey, value))
+                pendingJsonMapping.append("self.\(swiftProperty) = [\(typeName)](jsonArray: jsonDictionary[\"\(jsonKey)\"].jsonArrayOrDefault)")
+                
+            default:
+                result += "\(tabSapce)let \(swiftProperty): Any?"
+                
+                pendingInit.append((key: swiftProperty, type: "Any?"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"]")
+            }
+        }
+        
+        // 輸出 struct 後大刮號
+        result += "}\r\n"
+        
+        for (key, dictionary) in pendingJsonDictionary {
+            result += convertToDecodable(for: dictionary, withKey: key)
+        }
+        
+        return result
+    }
+}

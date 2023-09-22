@@ -15,6 +15,13 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func printJsonDecodableModel(_ sender: Any) {
+        let jsonString: String = "{\"metadata\":{\"status\":\"0000\",\"desc\":\"\"},\"data\":{\"uncommented_orders\":[{\"id\":\"17KK111111\",\"prod_name\":\"product name\",\"img_url\":\"https://img.sit.kkday.com/image/get/w_600%2Cc_fit/s1.kkday.com/product_2173/20150528034717_QInp9/jpg\",\"lst_dt_go\":\"2017-11-11 (Taipei)\"}]}}"
+        let jsonModel: String = jsonString.jsonDecodableModel
+        
+        print(jsonModel)
+    }
+
     @IBAction func printJsonModel(_ sender: UIButton) {
         let jsonString: String = "{\"metadata\":{\"status\":\"0000\",\"desc\":\"\"},\"data\":{\"uncommented_orders\":[{\"id\":\"17KK111111\",\"prod_name\":\"product name\",\"img_url\":\"https://img.sit.kkday.com/image/get/w_600%2Cc_fit/s1.kkday.com/product_2173/20150528034717_QInp9/jpg\",\"lst_dt_go\":\"2017-11-11 (Taipei)\"}]}}"
         let jsonModel: String = jsonString.jsonModel
