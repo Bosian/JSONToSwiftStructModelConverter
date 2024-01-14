@@ -10,10 +10,16 @@ import Cocoa
 
 class ViewController: NSViewController {
 
+    @IBOutlet weak var leftTextView: NSTextView!
+    @IBOutlet weak var rightTextView: NSTextView!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // 避免顏色跑掉
+        leftTextView.textColor = NSColor.textColor
+        rightTextView.textColor = NSColor.textColor
     }
 
     override var representedObject: Any? {
@@ -22,6 +28,12 @@ class ViewController: NSViewController {
         }
     }
 
+    @IBAction func onButtonTapped(_ sender: NSButtonCell) {
 
+        let json: String = leftTextView.string
+        defer {
+            rightTextView.string = json.jsonDecodableModel
+        }
+    }
 }
 
