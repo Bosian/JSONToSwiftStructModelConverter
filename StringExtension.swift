@@ -225,27 +225,30 @@ extension String {
         guard let data = jsonString.data(using: .utf8) else {
             return ""
         }
-        
-        var dictionary: JsonDictionary?
+
+        let key: String = "Root"
         
         do {
-            dictionary = try JSONSerialization.jsonObject(with: data, options: []) as? JsonDictionary
+            switch try JSONSerialization.jsonObject(with: data, options: []) {
+                case let value as JsonDictionary:
+                    return convertToDecodable(for: value, withKey: key)
+                    
+                case let value as JsonArray:
+                    
+                    guard let value = value.first else { return "" }
+                    return convertToDecodable(for: value, withKey: key)
+                    
+                default:
+                    return ""
+            }
         }
         catch let error
         {
             print(error.localizedDescription)
             return ""
         }
-        
-        guard let dictionaryUnwrapped = dictionary else {
-            return ""
-        }
-        
-        let key = "Root"
-        let result = convertToDecodable(for: dictionaryUnwrapped, withKey: key)
-        return result
     }
-    
+
     /// 將 Dictionary 輸出成 Json String
     ///
     /// - Parameters:
@@ -297,7 +300,7 @@ extension String {
                 
             case _ as Int:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
-                let defaultValue = -1
+                    _ = -1
                 result += "\(tabSpace)let \(swiftProperty): Int"
                 
                 pendingInit.append((key: swiftProperty, type: "Int"))
@@ -406,7 +409,7 @@ extension String {
         }
         
         let key = "Root"
-        let result = convertToEncodableFromPostman(for: arrayUnwrapped, withKey: key)
+        let result = convertToEncodableFromPostman(for: arrayUnwrapped, withKey: key, superType: Encodable.self)
         return result
     }
     
@@ -415,9 +418,9 @@ extension String {
     /// - Parameters:
     ///   - dictionary: Json Dictionary
     ///   - key: Root struct Name
-    private func convertToEncodableFromPostman(for array: JsonArray, withKey key: String) -> String
+    private func convertToEncodableFromPostman<T>(for array: JsonArray, withKey key: String, superType: T) -> String
     {
-        let postmanTuples: [(key: String, value: String, description: String, enabled: Bool)] = array.map { dictionary in
+        let postmanTuples: [(key: String, value: String, description: String, enabenabled: Bool)] = array.map { dictionary in
 
             var key: String = ""
             var value: String = ""
@@ -448,7 +451,7 @@ extension String {
             return (key, value, description, enabled)
         }
         
-        var pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
+        let pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
         var pendingInit: [(key: String, type: String)] = []
         var pendingJsonMapping: [String] = []
         var pendingPropertyMapping: [(swiftProperty: String, jsonKey: String)] = []
@@ -456,7 +459,7 @@ extension String {
         // 輸出 struct 開頭
         let typeName = pascalCase(for: key)
 
-        var result = "struct \(typeName): \(Encodable.self) {\r\n" {
+        var result = "struct \(typeName): \(T.self) {\r\n" {
             didSet {
                 result += "\r\n"
             }
@@ -464,7 +467,7 @@ extension String {
         
         let tabSpace = "    "
         
-        for (key, value, description, enabled) in postmanTuples {
+        for (key, value, description, _) in postmanTuples {
             
             let swiftProperty = key // camelCase(for: key)
             let jsonKey = key
@@ -491,7 +494,7 @@ extension String {
                 
             case _ as Int:
                 
-                let defaultValue = -1
+                    _ = -1
                 result += "\(tabSpace)let \(swiftProperty): Int"
                 
                 pendingInit.append((key: swiftProperty, type: "Int"))
