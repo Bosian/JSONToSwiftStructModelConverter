@@ -11,11 +11,11 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="macOSJsonConverter" id="1Xt-HY-uBw">
+                            <menuItem title="JsonConverter" id="1Xt-HY-uBw">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="macOSJsonConverter" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="JsonConverter" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About macOSJsonConverter" id="5kV-Vb-QxS">
+                                        <menuItem title="About JsonConverter" id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
@@ -29,7 +29,7 @@
                                             <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide macOSJsonConverter" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide JsonConverter" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
                                             </connections>
@@ -47,7 +47,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit macOSJsonConverter" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Quit JsonConverter" keyEquivalent="q" id="4sb-4s-VLi">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
@@ -713,8 +713,8 @@
                                 <rect key="frame" x="12" y="12" width="519" height="246"/>
                                 <subviews>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-id-cDP">
-                                        <rect key="frame" x="-2" y="230" width="348" height="16"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Convert JSON stirng to Swift Decodable struct model" id="zcg-j5-sqk">
+                                        <rect key="frame" x="-2" y="230" width="311" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Convert JSON stirng to Decodable struct model" id="zcg-j5-sqk">
                                             <font key="font" metaFont="systemBold"/>
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -793,15 +793,7 @@
                                                             <size key="minSize" width="210" height="84"/>
                                                             <size key="maxSize" width="240" height="10000000"/>
                                                             <attributedString key="textStorage">
-                                                                <fragment content="Swift ">
-                                                                    <attributes>
-                                                                        <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                        <font key="NSFont" size="12" name="Helvetica"/>
-                                                                        <font key="NSOriginalFont" size="12" name="Helvetica"/>
-                                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                                                    </attributes>
-                                                                </fragment>
-                                                                <fragment content="struct model will be generated here">
+                                                                <fragment content="Struct model will be generated here">
                                                                     <attributes>
                                                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         <font key="NSFont" size="12" name="Helvetica"/>

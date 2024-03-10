@@ -30,7 +30,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "96EFCC6E200B30E0000FF553"
-               BuildableName = "macOSJsonConverter.app"
+               BuildableName = "JsonConverter.app"
                BlueprintName = "macOSJsonConverter"
                ReferencedContainer = "container:JsonConverterTest.xcodeproj">
             </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EFCC6E200B30E0000FF553"
-            BuildableName = "macOSJsonConverter.app"
+            BuildableName = "JsonConverter.app"
             BlueprintName = "macOSJsonConverter"
             ReferencedContainer = "container:JsonConverterTest.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "96EFCC6E200B30E0000FF553"
-            BuildableName = "macOSJsonConverter.app"
+            BuildableName = "JsonConverter.app"
             BlueprintName = "macOSJsonConverter"
             ReferencedContainer = "container:JsonConverterTest.xcodeproj">
          </BuildableReference>
