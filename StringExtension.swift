@@ -624,3 +624,100 @@ extension String {
         }()
     }
 }
+
+/// MARK: - Generate Unit test
+extension String {
+
+    /// 產生Unit test
+    var generateUnitTest: String {
+
+        let jsonString = self
+        guard let data = jsonString.data(using: .utf8) else {
+            return ""
+        }
+
+        let key: String = "Root"
+        
+        do {
+            switch try JSONSerialization.jsonObject(with: data, options: []) {
+                case let value as JsonDictionary:
+                    return convertToXCTest(for: value, withKey: key)
+                    
+                case let value as JsonArray:
+                    
+                    guard let value = value.first else { return "" }
+                    return convertToXCTest(for: value, withKey: key)
+                    
+                default:
+                    return ""
+            }
+        }
+        catch let error
+        {
+            print(error.localizedDescription)
+            return ""
+        }
+    }
+
+    private func convertToXCTest(for dictionary: JsonDictionary, withKey key: String) -> String
+    {
+        // 輸出 struct 開頭
+        let typeName = pascalCase(for: key)
+
+        var result = "func test\(typeName)() async throws {\r\n" {
+            didSet {
+                result += "\r\n"
+            }
+        }
+        
+        let tabSpace = "    "
+        
+        for (swiftProperty, value) in dictionary {
+            switch value {
+                case _ as String:
+                    // XCTAssertTrue(!model.message.isEmpty)
+                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    
+                case _ as Bool:
+                    result += "\(tabSpace)XCTAssertTrue(model.\(swiftProperty))"
+                    
+                case _ as Int:
+                    // XCTAssertTrue(item.position > -1)
+                    result += "\(tabSpace)XCTAssertTrue(model.\(swiftProperty) > 0)"
+                    
+                case _ as Double:
+                    result += "\(tabSpace)XCTAssertTrue(model.\(swiftProperty) > 0.0)"
+                    
+                case _ as [String]:
+                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    
+                case _ as [Int]:
+                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    
+                case _ as [Double]:
+                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    
+                case let value as JsonDictionary:
+                    result += convertToXCTest(for: value, withKey: swiftProperty)
+                    
+                case let value as JsonArray:
+                    
+                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    
+                    guard let value = value.first else {
+                        continue
+                    }
+                    
+                    result += convertToXCTest(for: value, withKey: swiftProperty)
+                    
+                default:
+                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+            }
+        }
+        
+        // 輸出 struct 後大刮號
+        result += "}\r\n"
+        
+        return result
+    }
+}

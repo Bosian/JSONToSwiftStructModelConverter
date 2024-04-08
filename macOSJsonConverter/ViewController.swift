@@ -28,12 +28,16 @@ class ViewController: NSViewController {
         }
     }
 
+    /// Generate Swift model
     @IBAction func onButtonTapped(_ sender: NSButtonCell) {
-
         let json: String = leftTextView.string
-        defer {
-            rightTextView.string = json.jsonDecodableModel
-        }
+        rightTextView.string = json.jsonDecodableModel
+    }
+    
+    /// Generate Unit test
+    @IBAction func onXCUnitTestTapped(_ sender: NSButton) {
+        let json: String = leftTextView.string
+        rightTextView.string = json.generateUnitTest
     }
 }
 

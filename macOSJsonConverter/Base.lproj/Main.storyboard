@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -684,7 +684,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Json struct converter" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -706,13 +706,13 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="JsonConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="543" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="638" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9R4-xf-Bib">
-                                <rect key="frame" x="12" y="12" width="519" height="246"/>
+                                <rect key="frame" x="12" y="12" width="614" height="246"/>
                                 <subviews>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-id-cDP">
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-id-cDP">
                                         <rect key="frame" x="-2" y="230" width="311" height="16"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Convert JSON stirng to Decodable struct model" id="zcg-j5-sqk">
                                             <font key="font" metaFont="systemBold"/>
@@ -721,7 +721,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ogz-0r-4XU">
-                                        <rect key="frame" x="0.0" y="0.0" width="519" height="222"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="222"/>
                                         <subviews>
                                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76d-IT-EF3">
                                                 <rect key="frame" x="0.0" y="69" width="241" height="84"/>
@@ -753,7 +753,6 @@
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
-                                                            <color key="insertionPointColor" name="textInsertionPointColor" catalog="System" colorSpace="catalog"/>
                                                         </textView>
                                                     </subviews>
                                                 </clipView>
@@ -766,32 +765,52 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                             </scrollView>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4kd-jR-FxS">
-                                                <rect key="frame" x="238" y="94" width="74" height="32"/>
-                                                <buttonCell key="cell" type="push" title="-&gt;" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eI1-Kz-keE">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                    <connections>
-                                                        <action selector="onButtonTapped:" target="XfG-lQ-9wD" id="EQq-2v-w7V"/>
-                                                    </connections>
-                                                </buttonCell>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="60" id="48b-jY-Dhe"/>
-                                                </constraints>
-                                            </button>
+                                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDc-0a-bvg">
+                                                <rect key="frame" x="245" y="91" width="110" height="40"/>
+                                                <subviews>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4kd-jR-FxS">
+                                                        <rect key="frame" x="-7" y="13" width="124" height="32"/>
+                                                        <buttonCell key="cell" type="push" title="-&gt; Swift Model" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eI1-Kz-keE">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                            <connections>
+                                                                <action selector="onButtonTapped:" target="XfG-lQ-9wD" id="EQq-2v-w7V"/>
+                                                            </connections>
+                                                        </buttonCell>
+                                                    </button>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bdO-1g-7wX">
+                                                        <rect key="frame" x="-7" y="-7" width="123" height="32"/>
+                                                        <buttonCell key="cell" type="push" title="-&gt; XC unit test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rBL-wS-zZX">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="onXCUnitTestTapped:" target="XfG-lQ-9wD" id="4tw-OU-Wtm"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
                                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCV-KX-XDC">
-                                                <rect key="frame" x="309" y="69" width="210" height="84"/>
+                                                <rect key="frame" x="359" y="69" width="241" height="84"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="MuF-TO-YHX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="210" height="84"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="241" height="84"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" smartInsertDelete="YES" id="DjN-HM-bas">
-                                                            <rect key="frame" x="0.0" y="0.0" width="210" height="84"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="241" height="84"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <size key="minSize" width="210" height="84"/>
-                                                            <size key="maxSize" width="240" height="10000000"/>
+                                                            <size key="minSize" width="241" height="84"/>
+                                                            <size key="maxSize" width="241" height="10000000"/>
                                                             <attributedString key="textStorage">
                                                                 <fragment content="Struct model will be generated here">
                                                                     <attributes>
@@ -801,7 +820,6 @@
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
-                                                            <color key="insertionPointColor" name="textInsertionPointColor" catalog="System" colorSpace="catalog"/>
                                                         </textView>
                                                     </subviews>
                                                 </clipView>
@@ -810,13 +828,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="e41-7D-e7w">
-                                                    <rect key="frame" x="194" y="0.0" width="16" height="84"/>
+                                                    <rect key="frame" x="225" y="0.0" width="16" height="84"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                             </scrollView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="76d-IT-EF3" firstAttribute="width" secondItem="DjN-HM-bas" secondAttribute="width" multiplier="1.14754" id="VwG-W0-NPg"/>
+                                            <constraint firstItem="76d-IT-EF3" firstAttribute="width" secondItem="DjN-HM-bas" secondAttribute="width" multiplier="1:1" id="VwG-W0-NPg"/>
                                         </constraints>
                                         <visibilityPriorities>
                                             <integer value="1000"/>

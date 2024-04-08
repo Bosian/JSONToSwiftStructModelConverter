@@ -13,6 +13,7 @@ enum SourceCommandType: String {
     case jsonDeserialization
     case decodable
     case postmanParameter
+    case generateUnitTest
 
     init?(invocation: XCSourceEditorCommandInvocation) {
 

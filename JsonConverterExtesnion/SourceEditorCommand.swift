@@ -41,6 +41,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 
                 case .postmanParameter:
                     return json.jsonFromPostmanParams
+
+                case .generateUnitTest:
+                    return json.generateUnitTest
             }
         }()
 
