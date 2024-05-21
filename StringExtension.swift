@@ -69,7 +69,7 @@ extension String {
             pendingPropertyMapping.append((swiftProperty: swiftProperty, jsonKey: jsonKey))
             
             switch value {
-            case _ as String:
+            case is String:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)public var \(swiftProperty): String = \"\""
                 
@@ -77,7 +77,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
 
-            case _ as Bool:
+            case is Bool:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)public var \(swiftProperty): Bool = false"
                 
@@ -85,7 +85,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
                 
-            case _ as Int:
+            case is Int:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 let defaultValue = -1
                 result += "\(tabSpace)public var \(swiftProperty): Int = \(defaultValue)"
@@ -94,7 +94,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
                 
-            case _ as Double:
+            case is Double:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)public var \(swiftProperty): Double = 0.0"
                 
@@ -102,7 +102,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleOrDefault")
                 
-            case _ as [String]:
+            case is [String]:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)public var \(swiftProperty): [String] = []"
                 
@@ -110,7 +110,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringArrayOrDefault")
                 
-            case _ as [Int]:
+            case is [Int]:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)public var \(swiftProperty): [Int] = []"
                 
@@ -118,7 +118,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intArrayOrDefault")
                 
-            case _ as [Double]:
+            case is [Double]:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)public var \(swiftProperty): [Double] = []"
                 
@@ -281,7 +281,7 @@ extension String {
             pendingPropertyMapping.append((swiftProperty: swiftProperty, jsonKey: jsonKey))
             
             switch value {
-            case _ as String:
+            case is String:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                     
                 result += "\(tabSpace)let \(swiftProperty): String"
@@ -290,7 +290,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
 
-            case _ as Bool:
+            case is Bool:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)let \(swiftProperty): Bool"
                 
@@ -298,7 +298,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
                 
-            case _ as Int:
+            case is Int:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                     _ = -1
                 result += "\(tabSpace)let \(swiftProperty): Int"
@@ -307,7 +307,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
                 
-            case _ as Double:
+            case is Double:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)let \(swiftProperty): Double"
                 
@@ -315,7 +315,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleOrDefault")
                 
-            case _ as [String]:
+            case is [String]:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)let \(swiftProperty): [String]"
                 
@@ -323,7 +323,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringArrayOrDefault")
                 
-            case _ as [Int]:
+            case is [Int]:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)let \(swiftProperty): [Int]"
                 
@@ -331,7 +331,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intArrayOrDefault")
                 
-            case _ as [Double]:
+            case is [Double]:
                 appendComment(result: &result, tabSapce: tabSpace, value: value)
                 result += "\(tabSpace)let \(swiftProperty): [Double]"
                 
@@ -478,21 +478,21 @@ extension String {
             appendComment(result: &result, tabSapce: tabSpace, value: value, description: description)
 
             switch value {
-            case _ as String:
+            case is String:
                 result += "\(tabSpace)let \(swiftProperty): String"
                 
                 pendingInit.append((key: swiftProperty, type: "String"))
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
 
-            case _ as Bool:
+            case is Bool:
                 result += "\(tabSpace)let \(swiftProperty): Bool"
                 
                 pendingInit.append((key: swiftProperty, type: "Bool"))
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
                 
-            case _ as Int:
+            case is Int:
                 
                     _ = -1
                 result += "\(tabSpace)let \(swiftProperty): Int"
@@ -501,7 +501,7 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
                 
-            case _ as Double:
+            case is Double:
                 result += "\(tabSpace)let \(swiftProperty): Double"
                 
                 pendingInit.append((key: swiftProperty, type: "Double"))
@@ -659,61 +659,76 @@ extension String {
         }
     }
 
-    private func convertToXCTest(for dictionary: JsonDictionary, withKey key: String) -> String
-    {
-        // 輸出 struct 開頭
-        let typeName = pascalCase(for: key)
+    private func nestedXCTest(for dictionary: JsonDictionary, withKey key: String, tabSpace: String = "    ") -> String {
 
-        var result = "func test\(typeName)() async throws {\r\n" {
+        var result: String = "" {
             didSet {
                 result += "\r\n"
             }
         }
         
-        let tabSpace = "    "
-        
         for (swiftProperty, value) in dictionary {
             switch value {
-                case _ as String:
-                    // XCTAssertTrue(!model.message.isEmpty)
-                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                case is String:
+                    // XCTAssertTrue(!\(key).message.isEmpty)
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
                     
-                case _ as Bool:
-                    result += "\(tabSpace)XCTAssertTrue(model.\(swiftProperty))"
+                case is Bool:
+                    result += "\(tabSpace)XCTAssertTrue(\(key).\(swiftProperty))"
                     
-                case _ as Int:
+                case is Int:
                     // XCTAssertTrue(item.position > -1)
-                    result += "\(tabSpace)XCTAssertTrue(model.\(swiftProperty) > 0)"
+                    result += "\(tabSpace)XCTAssertTrue(\(key).\(swiftProperty) > 0)"
                     
-                case _ as Double:
-                    result += "\(tabSpace)XCTAssertTrue(model.\(swiftProperty) > 0.0)"
+                case is Double:
+                    result += "\(tabSpace)XCTAssertTrue(\(key).\(swiftProperty) > 0.0)"
                     
-                case _ as [String]:
-                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                case is [String]:
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
                     
-                case _ as [Int]:
-                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                case is [Int]:
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
                     
-                case _ as [Double]:
-                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                case is [Double]:
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
                     
                 case let value as JsonDictionary:
-                    result += convertToXCTest(for: value, withKey: swiftProperty)
+                    result += nestedXCTest(for: value, withKey: "\(key).\(swiftProperty)", tabSpace: tabSpace)
                     
                 case let value as JsonArray:
                     
-                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
                     
                     guard let value = value.first else {
                         continue
                     }
+
+                    let loopName: String = "item"
+                    result += "\r\n\(tabSpace)for \(loopName) in \(key).\(swiftProperty) {"
                     
-                    result += convertToXCTest(for: value, withKey: swiftProperty)
+                    result += nestedXCTest(for: value, withKey: loopName, tabSpace: tabSpace + tabSpace)
                     
+                    result += "\(tabSpace)}"
+                    
+                case is NSNull:
+                    result += "\(tabSpace)XCTAssertNotNil(\(key).\(swiftProperty))"
+
                 default:
                     result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
             }
         }
+        
+        return result
+    }
+
+    private func convertToXCTest(for dictionary: JsonDictionary, withKey key: String) -> String
+    {
+        // 輸出 struct 開頭
+        let typeName = pascalCase(for: key)
+
+        var result = "func test\(typeName)() async throws {\r\n"
+
+        result += nestedXCTest(for: dictionary, withKey: "model")
         
         // 輸出 struct 後大刮號
         result += "}\r\n"

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		373D983E1E4AC09F004EDB9B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373D983D1E4AC09F004EDB9B /* Model.swift */; };
+		960EA0072BFCD2F3000FFBE2 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EA0062BFCD2F3000FFBE2 /* ArrayExtension.swift */; };
+		960EA0082BFCD2F3000FFBE2 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EA0062BFCD2F3000FFBE2 /* ArrayExtension.swift */; };
+		960EA0092BFCD2F3000FFBE2 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960EA0062BFCD2F3000FFBE2 /* ArrayExtension.swift */; };
 		96326E061DC8684700C7D900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96326E051DC8684700C7D900 /* AppDelegate.swift */; };
 		96326E081DC8684700C7D900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96326E071DC8684700C7D900 /* ViewController.swift */; };
 		96326E0B1DC8684700C7D900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96326E091DC8684700C7D900 /* Main.storyboard */; };
@@ -125,6 +128,7 @@
 
 /* Begin PBXFileReference section */
 		373D983D1E4AC09F004EDB9B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		960EA0062BFCD2F3000FFBE2 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		96326E021DC8684700C7D900 /* JsonConverterTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JsonConverterTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96326E051DC8684700C7D900 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96326E071DC8684700C7D900 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				9651F7181EFEDA0300269ADE /* OptionalAnyExtension.swift */,
+				960EA0062BFCD2F3000FFBE2 /* ArrayExtension.swift */,
 				9692516B201DB6F9000173AE /* StringExtension.swift */,
 			);
 			name = Extension;
@@ -687,6 +692,7 @@
 				9651F7191EFEDA0300269ADE /* OptionalAnyExtension.swift in Sources */,
 				963CE0F31DCE673000DE1C31 /* JsonDictionary.swift in Sources */,
 				373D983E1E4AC09F004EDB9B /* Model.swift in Sources */,
+				960EA0072BFCD2F3000FFBE2 /* ArrayExtension.swift in Sources */,
 				9692516C201DB6F9000173AE /* StringExtension.swift in Sources */,
 				963CE10E1DCE686400DE1C31 /* ArrayType.swift in Sources */,
 			);
@@ -724,6 +730,7 @@
 				96925171201DB78F000173AE /* PropertyConverters.swift in Sources */,
 				9692516E201DB742000173AE /* JsonDictionary.swift in Sources */,
 				96925174201DB7B3000173AE /* JsonArray.swift in Sources */,
+				960EA0082BFCD2F3000FFBE2 /* ArrayExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +765,7 @@
 				96925176201DC1EF000173AE /* StringExtension.swift in Sources */,
 				9692517D201DC246000173AE /* PropertyMapping.swift in Sources */,
 				9692517A201DC229000173AE /* JsonArray.swift in Sources */,
+				960EA0092BFCD2F3000FFBE2 /* ArrayExtension.swift in Sources */,
 				964EE1D02ABD673D00CB7357 /* OptionalAnyExtension.swift in Sources */,
 				96925177201DC1FD000173AE /* JsonDictionary.swift in Sources */,
 			);
