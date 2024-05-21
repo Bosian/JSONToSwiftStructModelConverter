@@ -714,7 +714,7 @@ extension String {
                     result += "\(tabSpace)XCTAssertNotNil(\(key).\(swiftProperty))"
 
                 default:
-                    result += "\(tabSpace)XCTAssertTrue(!model.\(swiftProperty).isEmpty)"
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
             }
         }
         
