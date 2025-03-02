@@ -680,7 +680,7 @@ extension String {
                 case let value as NSNumber where value === kCFBooleanTrue || value === kCFBooleanFalse: // https://stackoverflow.com/questions/53547595/type-checks-on-int-and-bool-values-are-returning-incorrectly-in-swift-4-2
 
                     // is Bool
-                    result += "\(tabSpace)XCTAssertTrue(\(key).\(swiftProperty))"
+                    result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty))"
                     
                 case is Int:
                     // XCTAssertTrue(item.position > -1)
