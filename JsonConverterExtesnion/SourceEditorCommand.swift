@@ -54,9 +54,13 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         }
         
         let lines = invocation.buffer.lines
-//        // Reverse the order of the lines in a copy.
-//        let updatedText = Array(lines.reversed())
-//        lines.removeAllObjects()
-        lines.addObjects(from: [jsonModel])
+        guard let selection = invocation.buffer.selections.firstObject as? XCSourceTextRange else {
+            return
+        }
+
+        let lineNumber: Int = selection.start.line + 1
+        let adjustLineNumber: Int =  0...lines.count ~= lineNumber ? lineNumber : lines.count
+
+        lines.insert(jsonModel, at: adjustLineNumber)
     }
 }
