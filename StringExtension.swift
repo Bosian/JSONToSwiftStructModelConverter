@@ -77,8 +77,10 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
 
-            case is Bool:
-                appendComment(result: &result, tabSapce: tabSpace, value: value)
+            case let value as NSNumber where value === kCFBooleanTrue || value === kCFBooleanFalse: // https://stackoverflow.com/questions/53547595/type-checks-on-int-and-bool-values-are-returning-incorrectly-in-swift-4-2
+
+                // is Bool
+                appendComment(result: &result, tabSapce: tabSpace, value: value.boolValue)
                 result += "\(tabSpace)public var \(swiftProperty): Bool = false"
                 
                 pendingInit.append((key: swiftProperty, type: "Bool"))
@@ -290,8 +292,10 @@ extension String {
                 
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
 
-            case is Bool:
-                appendComment(result: &result, tabSapce: tabSpace, value: value)
+            case let value as NSNumber where value === kCFBooleanTrue || value === kCFBooleanFalse: // https://stackoverflow.com/questions/53547595/type-checks-on-int-and-bool-values-are-returning-incorrectly-in-swift-4-2
+
+                // is Bool
+                appendComment(result: &result, tabSapce: tabSpace, value: value.boolValue)
                 result += "\(tabSpace)let \(swiftProperty): Bool"
                 
                 pendingInit.append((key: swiftProperty, type: "Bool"))
@@ -673,7 +677,9 @@ extension String {
                     // XCTAssertTrue(!\(key).message.isEmpty)
                     result += "\(tabSpace)XCTAssertTrue(!\(key).\(swiftProperty).isEmpty)"
                     
-                case is Bool:
+                case let value as NSNumber where value === kCFBooleanTrue || value === kCFBooleanFalse: // https://stackoverflow.com/questions/53547595/type-checks-on-int-and-bool-values-are-returning-incorrectly-in-swift-4-2
+
+                    // is Bool
                     result += "\(tabSpace)XCTAssertTrue(\(key).\(swiftProperty))"
                     
                 case is Int:
