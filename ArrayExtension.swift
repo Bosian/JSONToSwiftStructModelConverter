@@ -53,8 +53,8 @@ extension Sequence {
     
     /// 有順序的平行執行(並發)ForEach [來源](https://www.swiftbysundell.com/articles/async-and-concurrent-forEach-and-map/)]
     func concurrentMap<T>(
-        _ transform: @escaping (Element) async throws -> T
-    ) async throws -> [T] {
+        _ transform: @Sendable @escaping (Element) async throws -> T
+    ) async throws -> [T] where Element: Sendable, T: Sendable {
         let tasks: [Task<T, any Error>] = map { element in
             return Task {
                 try await transform(element)
@@ -70,8 +70,8 @@ extension Sequence {
     
     /// 有順序的平行執行 (一個中斷不影響其它)
     func concurrentCompactMap<T>(
-        _ transform: @escaping (Element) async throws -> T?
-    ) async -> [T] {
+        _ transform: @Sendable @escaping (Element) async throws -> T?
+    ) async -> [T] where Element: Sendable, T: Sendable {
         let tasks: [Task<T?, any Error>] = map { element in
             return Task {
                 try? await transform(element)
