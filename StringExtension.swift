@@ -617,11 +617,30 @@ extension String {
     fileprivate func appendComment<T>(result: inout String, tabSapce: String, value: T, description: String = "") {
         result += {
             var comment: String = "\r\n\(tabSapce)/// "
+            print(comment)
 
-            if value is String {
-                comment += "e.g. \"\(value)\""
-            } else {
-                comment += "e.g. \(value)"
+            switch value {
+                case let value as String:
+                    comment += "e.g. \"\(value)\""
+                    
+                case let value as [String]:
+                    let value = value.joined(separator: "\", \"")
+                    comment += "e.g. [\"\(value)\"]"
+                    
+                case let value as [Int]:
+                    let value: [String] = value.map({ (item: Int) -> String in
+                        return String(item)
+                    })
+                    comment += "e.g. [\(value.joined(separator: ", "))]"
+                    
+                case let value as [Double]:
+                    let value: [String] = value.map({ (item: Double) -> String in
+                        return String(item)
+                    })
+                    comment += "e.g. [\(value.joined(separator: ", "))]"
+
+                default:
+                    comment += "e.g. \(value)"
             }
 
             return comment
