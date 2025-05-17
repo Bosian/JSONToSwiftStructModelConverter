@@ -388,6 +388,186 @@ extension String {
     }
 }
 
+/// MARK: - Swift 4 Decodable with default
+extension String {
+
+    public var jsonDecodableWithDefaultModel: String
+    {
+        let jsonString = self
+        guard let data = jsonString.data(using: .utf8) else {
+            return ""
+        }
+
+        let key: String = "Root"
+        
+        do {
+            switch try JSONSerialization.jsonObject(with: data, options: []) {
+                case let value as JsonDictionary:
+                    return convertToDecodableWithDefault(for: value, withKey: key)
+                    
+                case let value as JsonArray:
+                    
+                    guard let value = value.first else { return "" }
+                    return convertToDecodableWithDefault(for: value, withKey: key)
+                    
+                default:
+                    return ""
+            }
+        }
+        catch let error
+        {
+            print(error.localizedDescription)
+            return ""
+        }
+    }
+
+    /// 將 Dictionary 輸出成 Json String
+    ///
+    /// - Parameters:
+    ///   - dictionary: Json Dictionary
+    ///   - key: Root struct Name
+    private func convertToDecodableWithDefault(for dictionary: JsonDictionary, withKey key: String) -> String
+    {
+        
+        var pendingJsonDictionary: [(key: String, value: JsonDictionary)] = []
+        var pendingInit: [(key: String, type: String)] = []
+        var pendingJsonMapping: [String] = []
+        var pendingPropertyMapping: [(swiftProperty: String, jsonKey: String)] = []
+        
+        // 輸出 struct 開頭
+        let typeName = pascalCase(for: key)
+
+        var result = "struct \(typeName): \(Decodable.self) {\r\n" {
+            didSet {
+                result += "\r\n"
+            }
+        }
+        
+        let tabSpace = "    "
+        
+        for (key, value) in dictionary {
+            
+            let swiftProperty = key // camelCase(for: key)
+            let jsonKey = key
+            
+            pendingPropertyMapping.append((swiftProperty: swiftProperty, jsonKey: jsonKey))
+            
+            switch value {
+            case is String:
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+                    
+                result += "\(tabSpace)@Default.EmptyString"
+                result += "\(tabSpace)var \(swiftProperty): String"
+                
+                pendingInit.append((key: swiftProperty, type: "String"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringOrDefault")
+
+            case let value as NSNumber where value === kCFBooleanTrue || value === kCFBooleanFalse: // https://stackoverflow.com/questions/53547595/type-checks-on-int-and-bool-values-are-returning-incorrectly-in-swift-4-2
+
+                // is Bool
+                appendComment(result: &result, tabSapce: tabSpace, value: value.boolValue)
+                result += "\(tabSpace)@Default.False"
+                result += "\(tabSpace)var \(swiftProperty): Bool"
+                
+                pendingInit.append((key: swiftProperty, type: "Bool"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].boolOrDefault")
+                
+            case is Int:
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+                _ = -1
+                result += "\(tabSpace)@Default.ZeroInt"
+                result += "\(tabSpace)var \(swiftProperty): Int"
+                
+                pendingInit.append((key: swiftProperty, type: "Int"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intOrDefault")
+                
+            case is Double:
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+                result += "\(tabSpace)@Default.ZeroDouble"
+                result += "\(tabSpace)var \(swiftProperty): Double"
+                
+                pendingInit.append((key: swiftProperty, type: "Double"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleOrDefault")
+                
+            case is [String]:
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+                result += "\(tabSpace)@Default.EmptyStringArray"
+                result += "\(tabSpace)var \(swiftProperty): [String]"
+                
+                pendingInit.append((key: swiftProperty, type: "[String]"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].stringArrayOrDefault")
+                
+            case is [Int]:
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+                result += "\(tabSpace)@Default<Array.Empty>"
+                result += "\(tabSpace)var \(swiftProperty): [Int]"
+                
+                pendingInit.append((key: swiftProperty, type: "[Int]"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].intArrayOrDefault")
+                
+            case is [Double]:
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+                result += "\(tabSpace)@Default<Array.Empty>"
+                result += "\(tabSpace)var \(swiftProperty): [Double]"
+                
+                pendingInit.append((key: swiftProperty, type: "[Double]"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleArrayOrDefault")
+                
+            case let value as JsonDictionary:
+                
+                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                result += "\(tabSpace)@Default<Optional.Nil>"
+                result += "\(tabSpace)var \(swiftProperty): \(typeName)?"
+                
+                pendingInit.append((key: swiftProperty, type: "\(typeName)"))
+                
+                pendingJsonDictionary.append((jsonKey, value))
+                pendingJsonMapping.append("self.\(swiftProperty) = \(typeName)(jsonDictionary: jsonDictionary[\"\(jsonKey)\"].jsonDictionaryOrDefault)")
+                
+                
+            case let value as JsonArray:
+                
+                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                result += "\(tabSpace)@Default<Array.Empty>"
+                result += "\(tabSpace)var \(swiftProperty): [\(typeName)]"
+                
+                pendingInit.append((key: swiftProperty, type: "[\(typeName)]"))
+                
+                guard let value = value.first else {
+                    continue
+                }
+                
+                pendingJsonDictionary.append((jsonKey, value))
+                pendingJsonMapping.append("self.\(swiftProperty) = [\(typeName)](jsonArray: jsonDictionary[\"\(jsonKey)\"].jsonArrayOrDefault)")
+                
+            default:
+                result += "\(tabSpace)@Default<Optional.Nil>"
+                result += "\(tabSpace)var \(swiftProperty): Any?"
+                
+                pendingInit.append((key: swiftProperty, type: "Any?"))
+                
+                pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"]")
+            }
+        }
+        
+        // 輸出 struct 後大刮號
+        result += "}\r\n"
+        
+        for (key, dictionary) in pendingJsonDictionary {
+            result += convertToDecodableWithDefault(for: dictionary, withKey: key)
+        }
+        
+        return result
+    }
+}
+
 /// Mark: - From postman params
 extension String {
     
