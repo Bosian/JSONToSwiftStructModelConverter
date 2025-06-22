@@ -945,7 +945,23 @@ extension String {
 /// @Default library
 extension String {
     static var defaultLibrary: String {
-        return """
+        return #"""
+
+            extension CGFloat {
+                init?(_ value: String) {
+                    guard let doubleValue = Double(value) else {
+                        return nil
+                    }
+                    
+                    self = CGFloat(doubleValue)
+                }
+            }
+
+            extension String {
+                init(_ value: CGFloat) {
+                    self = "\(value)"
+                }
+            }
             
             protocol DefaultValue {
                 associatedtype Value: Decodable
@@ -1292,6 +1308,6 @@ extension String {
                 }
             }
             
-            """
+            """#
     }
 }
