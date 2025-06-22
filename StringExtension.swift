@@ -941,3 +941,357 @@ extension String {
         return result
     }
 }
+
+/// @Default library
+extension String {
+    static var defaultLibrary: String {
+        return """
+            
+            protocol DefaultValue {
+                associatedtype Value: Decodable
+                static var defaultValue: Value { get }
+            }
+
+            extension Int {
+                struct Zero: DefaultValue {
+                    static var defaultValue: Int { 0 }
+                }
+            }
+
+            extension Bool {
+
+                struct True: DefaultValue {
+                    static var defaultValue: Bool { true }
+                }
+                
+                struct False: DefaultValue {
+                    static var defaultValue: Bool { false }
+                }
+
+            }
+
+            extension Double {
+                struct Zero: DefaultValue {
+                    static var defaultValue: Double { 0.0 }
+                }
+            }
+
+            extension CGFloat {
+                struct Zero: DefaultValue {
+                    static var defaultValue: CGFloat { 0.0 }
+                }
+            }
+
+            extension String {
+                struct Empty: DefaultValue {
+                    static var defaultValue: String { "" }
+                }
+            }
+
+            extension Array where Element: Decodable {
+                
+                
+                /// 解失敗給預設值 []
+                /// ```
+                /// @Default<Array.Empty> or @Default<Array.Empty>
+                /// var model: [Model]
+                /// ```
+                struct Empty: DefaultValue {
+                    static var defaultValue: Array<Element> { [] }
+                }
+            }
+
+            /// 用在JSON 反序列化 (套在欲decode的屬性上)
+            ///  ```
+            /// @Default<[Model]> or @Default<Array.Empty>
+            /// var model: [Model]
+            ///  ```
+            ///
+            ///  ```
+            /// /// e.g. 123123
+            /// @Default<String> or @Default.EmptyString
+            /// var article_id: String
+            ///  ```
+            /// - 支援 Int, Bool, Double, CGFloat, String, Array
+            /// - 找不到key，設成預設值
+            /// - 型態不符(String, Int, Double, CGFloat)，會嘗試轉型
+            @propertyWrapper
+            struct Default<T: DefaultValue> {
+                var wrappedValue: T.Value
+            }
+
+            /// MARK - 縮短泛型方便使用
+            extension Default {
+                typealias True = Default<Bool.True>
+                typealias False = Default<Bool.False>
+                typealias EmptyString = Default<String.Empty>
+                typealias ZeroInt = Default<Int.Zero>
+                typealias ZeroDouble = Default<Double.Zero>
+                typealias ZeroCGFloat = Default<CGFloat.Zero>
+                typealias EmptyStringArray = Default<Array<String>.Empty>
+            }
+
+            extension Optional where Wrapped: Decodable {
+                struct Nil: DefaultValue {
+                    static var defaultValue: Wrapped? { nil }
+                }
+            }
+
+            // Compile 成功，但實際使用是Compile error => @Default.Nil
+            //extension Default where T.Value: OptionalType {
+            //    typealias Nil = Default<Optional<T.Value>.Nil>
+            //}
+
+            extension Default: Encodable where T.Value: Encodable {
+                func encode(to encoder: any Encoder) throws {
+                    var container = encoder.singleValueContainer()
+                    try container.encode(wrappedValue)
+                }
+            }
+
+            extension Default: Decodable {
+
+                init(from decoder: Decoder) throws {
+                    let container = try decoder.singleValueContainer()
+                    
+                    wrappedValue = {
+                        switch T.Value.self {
+                            case is String.Type, is Optional<String>.Type:
+                                
+                                // Int, Double to Stirng
+                                let value: String? = {
+                                    if let value = (try? container.decode(String.self)) {
+                                        return value
+                                    } else if let value = (try? container.decode(Int.self)) {
+                                        return String(value)
+                                    } else if let value = (try? container.decode(Double.self)) {
+                                        return String(value)
+                                    } else {
+                                        return nil
+                                    }
+                                }()
+                                
+                                return value as? T.Value ?? T.defaultValue // 轉型失敗有預設值
+                                
+                            case is Int.Type, is Optional<Int>.Type:
+
+                                // Stirng, Double to Int
+                                let value: Int? = {
+                                    if let value = (try? container.decode(Int.self)) {
+                                        return value
+                                    } else if let value = (try? container.decode(String.self)) {
+                                        return Int(value) ?? {
+                                            guard let double = Double(value) else {
+                                                return nil
+                                            }
+                                            return Int(double)
+                                        }()
+                                    } else if let value = (try? container.decode(Double.self)) {
+                                        return Int(value)
+                                    } else {
+                                        return nil
+                                    }
+                                }()
+                                
+                                return value as? T.Value ?? T.defaultValue // 轉型失敗有預設值
+                                
+                            case is Double.Type, is Optional<Double>.Type:
+                                
+                                // Stirng, Int to Double
+                                let value: Double? = {
+                                    if let value = (try? container.decode(Double.self)) {
+                                        return value
+                                    } else if let value = (try? container.decode(String.self)) {
+                                        return Double(value)
+                                    } else if let value = (try? container.decode(Int.self)) {
+                                        return Double(value)
+                                    } else {
+                                        return nil
+                                    }
+                                }()
+                                
+                                return value as? T.Value ?? T.defaultValue // 轉型失敗有預設值
+                                
+                            case is CGFloat.Type, is Optional<CGFloat>.Type:
+
+                                // Stirng, Int to CGFloat
+                                let value: CGFloat? = {
+                                    if let value = (try? container.decode(CGFloat.self)) {
+                                        return value
+                                    } else if let value = (try? container.decode(String.self)) {
+                                        return CGFloat(value)
+                                    } else if let value = (try? container.decode(Int.self)) {
+                                        return CGFloat(value)
+                                    } else {
+                                        return nil
+                                    }
+                                }()
+                                
+                                return value as? T.Value ?? T.defaultValue // 轉型失敗有預設值
+
+                            case is Array<String>.Type, is Optional<Array<String>>.Type:
+                                
+                                // Double, CGFloat, Int to Array<String>
+                                let value: Array<String>? = {
+                                    if let value = (try? container.decode(Array<String>.self)) {
+                                        return value
+                                    } else if let value = (try? container.decode(Array<Int>.self)) {
+                                        return value.map { (item: Int) -> String in
+                                            return String(item)
+                                        }
+                                    } else if let value = (try? container.decode(Array<CGFloat>.self)) {
+                                        return value.map { (item: CGFloat) -> String in
+                                            return String(item)
+                                        }
+                                    } else if let value = (try? container.decode(Array<Double>.self)) {
+                                        return value.map { (item: Double) -> String in
+                                            return String(item)
+                                        }
+                                    } else {
+                                        return nil
+                                    }
+                                }()
+                                
+                                return value as? T.Value ?? T.defaultValue // 轉型失敗有預設值
+                                
+                            default:
+                                return (try? container.decode(T.Value.self)) ?? T.defaultValue // decode失敗有預設值
+                        }
+                    }()
+                }
+            }
+
+            extension KeyedDecodingContainer {
+                func decode<T>(_ type: Default<T>.Type, forKey key: Key) throws -> Default<T> where T: DefaultValue {
+                    
+                    // 沒Key時給預設值
+                    try decodeIfPresent(type, forKey: key) ?? Default(wrappedValue: T.defaultValue)
+                }
+            }
+
+            /// Decodable decode不用給Type
+            extension KeyedDecodingContainer {
+
+                /// 型別容錯 + 預設值 For T
+                func decodeIfPresent<T>(forKey key: Key, defaultValue: T) -> T where T: Decodable {
+                    return decodeIfPresent(forKey: key) ?? defaultValue
+                }
+                
+                /// 型別容錯 + 預設值 For Optional<T> (不能用非Optional<T>，結果會不正確)
+                func decodeIfPresent<T>(forKey key: Key, defaultValue: T) -> T? where T: Decodable {
+                    return decodeIfPresent(forKey: key) ?? defaultValue
+                }
+                
+                /// 型別容錯 + nil
+                func decodeIfPresent<T>(forKey key: Key) -> T? where T: Decodable {
+
+                    let container = self
+
+                    switch T.self {
+                        case is String.Type, is Optional<Int>.Type:
+                            
+                            // Int, Double to Stirng
+                            let value: String? = {
+                                if let value = (try? container.decode(String.self, forKey: key)) {
+                                    return value
+                                } else if let value = (try? container.decode(Int.self, forKey: key)) {
+                                    return String(value)
+                                } else if let value = (try? container.decode(Double.self, forKey: key)) {
+                                    return String(value)
+                                } else {
+                                    return nil
+                                }
+                            }()
+                            
+                            return value as? T
+                            
+                        case is Int.Type, is Optional<Int>.Type:
+
+                            // Stirng, Double to Int
+                            let value: Int? = {
+                                if let value = (try? container.decode(Int.self, forKey: key)) {
+                                    return value
+                                } else if let value = (try? container.decode(String.self, forKey: key)) {
+                                    return Int(value) ?? {
+                                        guard let double = Double(value) else {
+                                            return nil
+                                        }
+                                        return Int(double)
+                                    }()
+                                } else if let value = (try? container.decode(Double.self, forKey: key)) {
+                                    return Int(value)
+                                } else {
+                                    return nil
+                                }
+                            }()
+                            
+                            return value as? T
+                            
+                        case is Double.Type, is Optional<Double>.Type:
+                            
+                            // Stirng, Int to Double
+                            let value: Double? = {
+                                if let value = (try? container.decode(Double.self, forKey: key)) {
+                                    return value
+                                } else if let value = (try? container.decode(String.self, forKey: key)) {
+                                    return Double(value)
+                                } else if let value = (try? container.decode(Int.self, forKey: key)) {
+                                    return Double(value)
+                                } else {
+                                    return nil
+                                }
+                            }()
+                            
+                            return value as? T
+                            
+                        case is CGFloat.Type, is Optional<CGFloat>.Type:
+
+                            // Stirng, Int to CGFloat
+                            let value: CGFloat? = {
+                                if let value = (try? container.decode(CGFloat.self, forKey: key)) {
+                                    return value
+                                } else if let value = (try? container.decode(String.self, forKey: key)) {
+                                    return CGFloat(value)
+                                } else if let value = (try? container.decode(Int.self, forKey: key)) {
+                                    return CGFloat(value)
+                                } else {
+                                    return nil
+                                }
+                            }()
+                            
+                            return value as? T
+
+                        case is Array<String>.Type, is Optional<Array<String>>.Type:
+                            
+                            // Double, CGFloat, Int to Array<String>
+                            let value: Array<String>? = {
+                                if let value = (try? container.decode(Array<String>.self, forKey: key)) {
+                                    return value
+                                } else if let value = (try? container.decode(Array<Int>.self, forKey: key)) {
+                                    return value.map { (item: Int) -> String in
+                                        return String(item)
+                                    }
+                                } else if let value = (try? container.decode(Array<CGFloat>.self, forKey: key)) {
+                                    return value.map { (item: CGFloat) -> String in
+                                        return String(item)
+                                    }
+                                } else if let value = (try? container.decode(Array<Double>.self, forKey: key)) {
+                                    return value.map { (item: Double) -> String in
+                                        return String(item)
+                                    }
+                                } else {
+                                    return nil
+                                }
+                            }()
+                            
+                            return value as? T
+                            
+                        default:
+                            return (try? container.decode(T.self, forKey: key))
+                    }
+                }
+            }
+            
+            """
+    }
+}

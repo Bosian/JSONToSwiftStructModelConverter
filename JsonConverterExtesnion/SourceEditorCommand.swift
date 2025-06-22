@@ -42,6 +42,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 case .decodableWithDefault:
                     return json.jsonDecodableWithDefaultModel
 
+                case .defaultLibrary:
+                    return String.defaultLibrary
+                    
                 case .postmanParameter:
                     return json.jsonFromPostmanParams
 

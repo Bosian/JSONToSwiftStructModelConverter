@@ -48,6 +48,14 @@
                     <key>XCSourceEditorCommandName</key>
                     <string>Paste decodable with default model</string>
                 </dict>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).defaultLibrary</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>Paste @Default library</string>
+                </dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>

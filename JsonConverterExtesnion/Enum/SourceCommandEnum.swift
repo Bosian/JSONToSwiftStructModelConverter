@@ -13,6 +13,7 @@ enum SourceCommandType: String {
     case jsonDeserialization
     case decodable
     case decodableWithDefault
+    case defaultLibrary
     case postmanParameter
     case generateUnitTest
 
