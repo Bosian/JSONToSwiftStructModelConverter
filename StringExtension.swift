@@ -130,7 +130,7 @@ extension String {
                 
             case let value as JsonDictionary:
                 
-                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)public var \(swiftProperty): \(typeName) = \(typeName)()"
                 
                 pendingInit.append((key: swiftProperty, type: "\(typeName)"))
@@ -141,7 +141,7 @@ extension String {
                 
             case let value as JsonArray:
                 
-                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)public var \(swiftProperty): [\(typeName)] = []"
                 
                 pendingInit.append((key: swiftProperty, type: "[\(typeName)]"))
@@ -345,7 +345,7 @@ extension String {
                 
             case let value as JsonDictionary:
                 
-                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)let \(swiftProperty): \(typeName)"
                 
                 pendingInit.append((key: swiftProperty, type: "\(typeName)"))
@@ -356,7 +356,7 @@ extension String {
                 
             case let value as JsonArray:
                 
-                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)let \(swiftProperty): [\(typeName)]"
                 
                 pendingInit.append((key: swiftProperty, type: "[\(typeName)]"))
@@ -522,7 +522,7 @@ extension String {
                 
             case let value as JsonDictionary:
                 
-                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)@Default<Optional.Nil>"
                 result += "\(tabSpace)var \(swiftProperty): \(typeName)?"
                 
@@ -534,7 +534,7 @@ extension String {
                 
             case let value as JsonArray:
                 
-                let typeName = uppercaseedFirstChar(for: swiftProperty)
+                let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)@Default<Array.Empty>"
                 result += "\(tabSpace)var \(swiftProperty): [\(typeName)]"
                 
