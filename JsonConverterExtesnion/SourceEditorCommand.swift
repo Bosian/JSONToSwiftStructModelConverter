@@ -50,6 +50,9 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 
                 case .generateUnitTest:
                     return json.generateUnitTest
+
+                case .generateSwiftTestingUnitTest:
+                    return json.generateSwiftTestingUnitTest
             }
         }()
 

@@ -72,6 +72,14 @@
 					<key>XCSourceEditorCommandName</key>
 					<string>Paste unit test from JSON</string>
 				</dict>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).generateSwiftTestingUnitTest</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>Paste SwiftTesting from JSON</string>
+                </dict>
 			</array>
 			<key>XCSourceEditorExtensionPrincipalClass</key>
 			<string>$(PRODUCT_MODULE_NAME).SourceEditorExtension</string>

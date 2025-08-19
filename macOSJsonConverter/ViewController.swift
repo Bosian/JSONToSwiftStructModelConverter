@@ -39,5 +39,11 @@ class ViewController: NSViewController {
         let json: String = leftTextView.string
         rightTextView.string = json.generateUnitTest
     }
+    
+    /// Generate Unit test
+    @IBAction func onSwiftTestingTapped(_ sender: NSButton) {
+        let json: String = leftTextView.string
+        rightTextView.string = json.generateSwiftTestingUnitTest
+    }
 }
 

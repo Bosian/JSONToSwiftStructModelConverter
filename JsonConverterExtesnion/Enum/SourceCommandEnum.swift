@@ -16,6 +16,7 @@ enum SourceCommandType: String {
     case defaultLibrary
     case postmanParameter
     case generateUnitTest
+    case generateSwiftTestingUnitTest
 
     init?(invocation: XCSourceEditorCommandInvocation) {
 

@@ -942,6 +942,121 @@ extension String {
     }
 }
 
+/// MARK: - Generate SwiftTesting
+extension String {
+
+    /// 產生基於 SwiftTesting Unit test
+    var generateSwiftTestingUnitTest: String {
+
+        let jsonString = self
+        guard let data = jsonString.data(using: .utf8) else {
+            return ""
+        }
+
+        let key: String = "Root"
+        
+        do {
+            switch try JSONSerialization.jsonObject(with: data, options: []) {
+                case let value as JsonDictionary:
+                    return convertToSwiftTesting(for: value, withKey: key)
+                    
+                case let value as JsonArray:
+                    
+                    guard let value = value.first else { return "" }
+                    return convertToSwiftTesting(for: value, withKey: key)
+                    
+                default:
+                    return ""
+            }
+        }
+        catch let error
+        {
+            print(error.localizedDescription)
+            return ""
+        }
+    }
+
+    private func nestedSwiftTesting(for dictionary: JsonDictionary, withKey key: String, tabSpace: String = "    ") -> String {
+
+        var result: String = "" {
+            didSet {
+                result += "\r\n"
+            }
+        }
+        
+        for (swiftProperty, value) in dictionary {
+            switch value {
+                case is String:
+                    // #expect(!\(key).message.isEmpty)
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty).isEmpty)"
+                    
+                case let value as NSNumber where value === kCFBooleanTrue || value === kCFBooleanFalse: // https://stackoverflow.com/questions/53547595/type-checks-on-int-and-bool-values-are-returning-incorrectly-in-swift-4-2
+
+                    // is Bool
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty))"
+                    
+                case is Int:
+                    // #expect(item.position > -1)
+                    result += "\(tabSpace)#expect(\(key).\(swiftProperty) > 0)"
+                    
+                case is Double:
+                    result += "\(tabSpace)#expect(\(key).\(swiftProperty) > 0.0)"
+                    
+                case is [String]:
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty).isEmpty)"
+                    
+                case is [Int]:
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty).isEmpty)"
+                    
+                case is [Double]:
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty).isEmpty)"
+                    
+                case let value as JsonDictionary:
+                    result += nestedSwiftTesting(for: value, withKey: "\(key).\(swiftProperty)", tabSpace: tabSpace)
+                    
+                case let value as JsonArray:
+                    
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty).isEmpty)"
+                    
+                    guard let value = value.first else {
+                        continue
+                    }
+
+                    let loopName: String = "item"
+                    result += "\r\n\(tabSpace)for \(loopName) in \(key).\(swiftProperty) {"
+                    
+                    result += nestedSwiftTesting(for: value, withKey: loopName, tabSpace: tabSpace + tabSpace)
+                    
+                    result += "\(tabSpace)}"
+                    
+                case is NSNull:
+                    result += "\(tabSpace)#expect(\(key).\(swiftProperty) != nil)"
+
+                default:
+                    result += "\(tabSpace)#expect(!\(key).\(swiftProperty).isEmpty)"
+            }
+        }
+        
+        return result
+    }
+
+    private func convertToSwiftTesting(for dictionary: JsonDictionary, withKey key: String) -> String
+    {
+        // 輸出 struct 開頭
+        let typeName = pascalCase(for: key)
+
+        var result = "@Test func test\(typeName)() async throws {\r\n"
+
+        result += nestedSwiftTesting(for: dictionary, withKey: "model")
+        
+        // 輸出 struct 後大刮號
+        result += "}\r\n"
+        
+        return result
+    }
+}
+
+
 /// @Default library
 extension String {
     static var defaultLibrary: String {
