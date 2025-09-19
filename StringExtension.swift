@@ -833,11 +833,11 @@ extension String {
                     })
                     comment += "e.g. [\(value.joined(separator: ", "))]"
 
-                case let value as JsonArray:
-                    comment += "\r\n"
+                case is JsonArray:
+                    comment = ""
                     
-                case let value as JsonDictionary:
-                    comment += "\r\n"
+                case is JsonDictionary:
+                    comment = ""
 
                 default:
                     comment += "e.g. \(value)"
