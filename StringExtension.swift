@@ -931,9 +931,7 @@ extension String {
                     let loopName: String = "item"
                     result += "\r\n\(tabSpace)for \(loopName) in \(key).\(swiftProperty) {"
                     
-                    result += nestedXCTest(for: value, withKey: loopName, tabSpace: tabSpace + tabSpace)
-                    
-                    result += "\(tabSpace)}"
+                    result += nestedXCTest(for: value, withKey: loopName, tabSpace: tabSpace + tabSpace) + "\(tabSpace)}\r\n"
                     
                 case is NSNull:
                     result += "\(tabSpace)XCTAssertNotNil(\(key).\(swiftProperty))"
@@ -1045,9 +1043,7 @@ extension String {
                     let loopName: String = "item"
                     result += "\r\n\(tabSpace)for \(loopName) in \(key).\(swiftProperty) {"
                     
-                    result += nestedSwiftTesting(for: value, withKey: loopName, tabSpace: tabSpace + tabSpace)
-                    
-                    result += "\(tabSpace)}"
+                    result += nestedSwiftTesting(for: value, withKey: loopName, tabSpace: tabSpace + tabSpace) + "\(tabSpace)}\r\n"
                     
                 case is NSNull:
                     result += "\(tabSpace)#expect(\(key).\(swiftProperty) != nil)"
