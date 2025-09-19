@@ -345,6 +345,8 @@ extension String {
                 
             case let value as JsonDictionary:
                 
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+
                 let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)let \(swiftProperty): \(typeName)"
                 
@@ -355,6 +357,8 @@ extension String {
                 
                 
             case let value as JsonArray:
+
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
                 
                 let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)let \(swiftProperty): [\(typeName)]"
@@ -369,6 +373,9 @@ extension String {
                 pendingJsonMapping.append("self.\(swiftProperty) = [\(typeName)](jsonArray: jsonDictionary[\"\(jsonKey)\"].jsonArrayOrDefault)")
                 
             default:
+
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+
                 result += "\(tabSpace)let \(swiftProperty): Any?"
                 
                 pendingInit.append((key: swiftProperty, type: "Any?"))
@@ -521,6 +528,8 @@ extension String {
                 pendingJsonMapping.append("self.\(swiftProperty) = jsonDictionary[\"\(jsonKey)\"].doubleArrayOrDefault")
                 
             case let value as JsonDictionary:
+
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
                 
                 let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)@Default<Optional.Nil>"
@@ -533,6 +542,8 @@ extension String {
                 
                 
             case let value as JsonArray:
+
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
                 
                 let typeName = pascalCase(for: swiftProperty)
                 result += "\(tabSpace)@Default<Array.Empty>"
@@ -548,6 +559,9 @@ extension String {
                 pendingJsonMapping.append("self.\(swiftProperty) = [\(typeName)](jsonArray: jsonDictionary[\"\(jsonKey)\"].jsonArrayOrDefault)")
                 
             default:
+
+                appendComment(result: &result, tabSapce: tabSpace, value: value)
+
                 result += "\(tabSpace)@Default<Optional.Nil>"
                 result += "\(tabSpace)var \(swiftProperty): Any?"
                 
@@ -818,6 +832,12 @@ extension String {
                         return String(item)
                     })
                     comment += "e.g. [\(value.joined(separator: ", "))]"
+
+                case let value as JsonArray:
+                    comment += "\r\n"
+                    
+                case let value as JsonDictionary:
+                    comment += "\r\n"
 
                 default:
                     comment += "e.g. \(value)"
