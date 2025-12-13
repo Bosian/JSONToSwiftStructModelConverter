@@ -10,7 +10,7 @@ import Foundation
 
 /// MARK: - Swift JsonDeserialziation
 extension String {
-    public var jsonModel: String
+    public var jsonStructModel: String
     {
         let jsonString = self
         guard let data = jsonString.data(using: .utf8) else {
