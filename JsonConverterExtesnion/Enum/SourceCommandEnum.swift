@@ -10,7 +10,6 @@ import Foundation
 import XcodeKit
 
 enum SourceCommandType: String {
-    case jsonDeserialization
     case decodable
     case decodableWithDefault
     case defaultLibrary

@@ -33,9 +33,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         
         let jsonModel: String = {
             switch type {
-                case .jsonDeserialization:
-                    return json.jsonModel
-                    
                 case .decodable:
                     return json.jsonDecodableModel
 
