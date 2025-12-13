@@ -24,22 +24,6 @@
 		<dict>
 			<key>XCSourceEditorCommandDefinitions</key>
 			<array>
-				<dict>
-					<key>XCSourceEditorCommandClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
-					<key>XCSourceEditorCommandIdentifier</key>
-					<string>$(PRODUCT_BUNDLE_IDENTIFIER).decodable</string>
-					<key>XCSourceEditorCommandName</key>
-					<string>Paste decodable model</string>
-				</dict>
-                <dict>
-                    <key>XCSourceEditorCommandClassName</key>
-                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
-                    <key>XCSourceEditorCommandIdentifier</key>
-                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).decodableWithDefault</string>
-                    <key>XCSourceEditorCommandName</key>
-                    <string>Paste decodable with default model</string>
-                </dict>
                 <dict>
                     <key>XCSourceEditorCommandClassName</key>
                     <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
@@ -47,6 +31,22 @@
                     <string>$(PRODUCT_BUNDLE_IDENTIFIER).defaultLibrary</string>
                     <key>XCSourceEditorCommandName</key>
                     <string>Paste @Default library</string>
+                </dict>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).decodableWithDefault</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>Paste decodable with @Default</string>
+                </dict>
+                <dict>
+                    <key>XCSourceEditorCommandClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+                    <key>XCSourceEditorCommandIdentifier</key>
+                    <string>$(PRODUCT_BUNDLE_IDENTIFIER).decodable</string>
+                    <key>XCSourceEditorCommandName</key>
+                    <string>Paste decodable model</string>
                 </dict>
 				<dict>
 					<key>XCSourceEditorCommandClassName</key>
