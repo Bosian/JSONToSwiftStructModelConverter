@@ -8,7 +8,6 @@
 
 import Foundation
 
-nonisolated
 protocol OptionalType {
     associatedtype Wrapped
     var optional: Wrapped? { get }
