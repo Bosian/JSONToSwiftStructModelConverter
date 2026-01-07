@@ -33,6 +33,12 @@ class ViewController: NSViewController {
         let json: String = leftTextView.string
         rightTextView.string = json.jsonDecodableModel
     }
+
+    /// Generate Swift model with @Default
+    @IBAction func onSwiftModelWithDefaultButtonTapped(_ sender: NSButtonCell) {
+        let json: String = leftTextView.string
+        rightTextView.string = json.jsonDecodableWithDefaultModel
+    }
     
     /// Generate Unit test
     @IBAction func onXCUnitTestTapped(_ sender: NSButton) {

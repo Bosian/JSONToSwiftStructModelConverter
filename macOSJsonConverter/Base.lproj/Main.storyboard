@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -707,11 +707,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="JsonConverter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="680" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="716" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9R4-xf-Bib">
-                                <rect key="frame" x="12" y="12" width="656" height="246"/>
+                                <rect key="frame" x="12" y="12" width="692" height="246"/>
                                 <subviews>
                                     <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dQU-id-cDP">
                                         <rect key="frame" x="-2" y="230" width="311" height="16"/>
@@ -722,7 +722,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ogz-0r-4XU">
-                                        <rect key="frame" x="0.0" y="0.0" width="602" height="222"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="692" height="222"/>
                                         <subviews>
                                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76d-IT-EF3">
                                                 <rect key="frame" x="0.0" y="69" width="241" height="84"/>
@@ -762,15 +762,15 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="eRm-1o-ncm">
-                                                    <rect key="frame" x="225" y="0.0" width="16" height="84"/>
+                                                    <rect key="frame" x="224" y="0.0" width="17" height="84"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                             </scrollView>
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LDc-0a-bvg">
-                                                <rect key="frame" x="245" y="81" width="112" height="60"/>
+                                                <rect key="frame" x="245" y="63" width="202" height="96"/>
                                                 <subviews>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4kd-jR-FxS">
-                                                        <rect key="frame" x="-7" y="33" width="124" height="32"/>
+                                                        <rect key="frame" x="0.0" y="72" width="114" height="24"/>
                                                         <buttonCell key="cell" type="push" title="-&gt; Swift Model" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eI1-Kz-keE">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -779,8 +779,18 @@
                                                             </connections>
                                                         </buttonCell>
                                                     </button>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BCJ-l9-zQd">
+                                                        <rect key="frame" x="0.0" y="48" width="202" height="24"/>
+                                                        <buttonCell key="cell" type="push" title="-&gt; Swift Model with @Default" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7cz-FR-LY4">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                            <connections>
+                                                                <action selector="onSwiftModelWithDefaultButtonTapped:" target="XfG-lQ-9wD" id="asp-GY-ysg"/>
+                                                            </connections>
+                                                        </buttonCell>
+                                                    </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bdO-1g-7wX">
-                                                        <rect key="frame" x="-7" y="13" width="123" height="32"/>
+                                                        <rect key="frame" x="0.0" y="24" width="113" height="24"/>
                                                         <buttonCell key="cell" type="push" title="-&gt; XC unit test" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rBL-wS-zZX">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -790,7 +800,7 @@
                                                         </connections>
                                                     </button>
                                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TJb-ZK-652">
-                                                        <rect key="frame" x="-7" y="-7" width="126" height="32"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="116" height="24"/>
                                                         <buttonCell key="cell" type="push" title="-&gt; SwiftTesting" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="F3b-Bs-SOm">
                                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -804,15 +814,17 @@
                                                     <integer value="1000"/>
                                                     <integer value="1000"/>
                                                     <integer value="1000"/>
+                                                    <integer value="1000"/>
                                                 </visibilityPriorities>
                                                 <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                     <real value="3.4028234663852886e+38"/>
                                                 </customSpacing>
                                             </stackView>
                                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCV-KX-XDC">
-                                                <rect key="frame" x="361" y="69" width="241" height="84"/>
+                                                <rect key="frame" x="451" y="69" width="241" height="84"/>
                                                 <clipView key="contentView" drawsBackground="NO" id="MuF-TO-YHX">
                                                     <rect key="frame" x="0.0" y="0.0" width="241" height="84"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -841,7 +853,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="e41-7D-e7w">
-                                                    <rect key="frame" x="225" y="0.0" width="16" height="84"/>
+                                                    <rect key="frame" x="224" y="0.0" width="17" height="84"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                             </scrollView>
